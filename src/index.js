@@ -1,13 +1,26 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import './index.css';
+import './style/index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import CompletedPage from './pages/completed-tasks-page';
+import InProgressPage from './pages/in-progress-page';
+import PrincipalePage from './pages/principale-page';
+
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <App />
+  <BrowserRouter>
+    <Routes>
+        <Route path="/" element={<App/>}>
+          <Route path="/" element={<PrincipalePage/>} />
+          <Route path="completed" element={<CompletedPage/>} />
+          <Route path="inprogress" element={<InProgressPage/>} />
+        </Route>
+    </Routes>    
+  </BrowserRouter>
   </React.StrictMode>
 );
 

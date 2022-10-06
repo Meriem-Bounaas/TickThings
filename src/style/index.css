@@ -16,7 +16,8 @@
     border-radius: 2px;
   }
 .button {
-    background: #3D4C53;
+    /* background: #3D4C53; */
+    background-color: #6d7075;
     height : 35px;
     overflow: hidden;
     text-align : center;
@@ -32,7 +33,7 @@
     height : 110px;
     margin-top: -100px;
     padding-top: 2px;
-    background : #4951e5;
+    background : #1d4ed8;
     left : -250px;
     transition : .3s;
     display: flex;
@@ -45,15 +46,13 @@
   }
   .btnText2 {
     margin-top : 63px;
-    /* margin-right : -130px; */
     color : #FFF;
   }
   .button:hover .btnTwo{ /*When hovering over .button change .btnTwo*/
     left: -1px;
   }
-  .button:hover .btnText{ /*When hovering over .button change .btnText*/
+  .button:hover .btnText{ 
     margin-left : 65px;
-    /* text-align: center; */
   }
   .button:active { /*Clicked and held*/
     box-shadow: 0px 5px 6px rgba(0,0,0,0.3);
@@ -62,3 +61,7 @@
   .shadow{
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
   }
+
+  textarea {
+    resize: none;
+ }

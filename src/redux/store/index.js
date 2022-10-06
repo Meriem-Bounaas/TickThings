@@ -4,7 +4,7 @@ import modalReducer from '../modal-slice/index.js'
 
 export const store = configureStore({
   reducer: {
-    task : taskReducer,
-    modal : modalReducer,
+    task: taskReducer,
+    modal: modalReducer,
   },
 })

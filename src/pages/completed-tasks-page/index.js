@@ -16,7 +16,7 @@ const CompletedPage = () => {
     return (
         <div className="flex flex-col w-full">
             <div className='flex flex-row justify-between px-20 items-baseline mb-9'>
-                <div className='capitalize text-4xl font-semibold text-second-color pt-8 h-fit flex flex-row items-center gap-2'>
+                <div className='capitalize text-4xl font-semibold text-second-color pt-8 h-fit flex flex-row items-end gap-2'>
                     <UilCheckCircle size="40" className="fill-third-color" />
                     completed tasks
                     <StatusBar />

@@ -30,8 +30,8 @@ const ModalWindow = () => {
     }
 
     return (
-        <div className="absolute top-0 left-0 bg-primary-color w-screen h-screen opacity-75 flex align-middle">
-            <div className="w-1/3 h-fit bg-white rounded-sm flex flex-col m-auto justify-between p-4 ">
+        <div className="absolute top-0 left-0 bg-primary-color w-screen h-screen flex align-middle modal">
+            <div className="w-1/3 h-fit bg-white rounded-sm flex flex-col m-auto justify-between p-4  ">
                 <form onSubmit={handleSubmit(onSubmit)}>
                     <input
                         type={'hidden'}
@@ -56,6 +56,7 @@ const ModalWindow = () => {
                         <input className="border my-1 p-1 rounded-sm mb-3"
                             type={'text'}
                             placeholder='Title'
+                            autoFocus={true}
                             defaultValue={titleEdit}                           
                             {...register("title", { required: true, maxLength: 20 })}
                         />
@@ -89,7 +90,7 @@ const ModalWindow = () => {
 
                     </div>
                     <footer className="flex flex-row justify-end">
-                        <Button text={isEditTask ? 'save task' : 'add task'} handleOnClick={() => { }} />
+                        <Button text={isEditTask ? 'save task' : 'add task'} />
                     </footer>
                 </form>
             </div>

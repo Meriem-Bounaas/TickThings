@@ -7,20 +7,24 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import CompletedPage from './pages/completed-tasks-page';
 import InProgressPage from './pages/in-progress-page';
 import PrincipalePage from './pages/principale-page';
+import { store } from './redux/store/index.js'
+import { Provider } from 'react-redux'
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-  <BrowserRouter>
-    <Routes>
-        <Route path="/" element={<App/>}>
-          <Route path="/" element={<PrincipalePage/>} />
-          <Route path="completed" element={<CompletedPage/>} />
-          <Route path="inprogress" element={<InProgressPage/>} />
-        </Route>
-    </Routes>    
-  </BrowserRouter>
+    <Provider store={store}>
+        <BrowserRouter>
+            <Routes>
+                <Route path="/" element={<App/>}>
+                  <Route path="/" element={<PrincipalePage/>} />
+                  <Route path="completed" element={<CompletedPage/>} />
+                  <Route path="inprogress" element={<InProgressPage/>} />
+                </Route>
+            </Routes>    
+      </BrowserRouter>
+    </Provider>
   </React.StrictMode>
 );
 

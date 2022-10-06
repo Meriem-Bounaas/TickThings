@@ -7,7 +7,7 @@ module.exports = {
     fontFamily: {
       'font': [ 'Inter Tight', 'sans-serif'],
       'logo': ['Yellowtail', 'cursive'],
-      'title': ['Montserrat Alternates']
+      'title': ['Montserrat Alternates'],
     },
     extend: {},
   },

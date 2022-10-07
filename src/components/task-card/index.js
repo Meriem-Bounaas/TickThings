@@ -14,12 +14,14 @@ const TaskCard = ({ task }) => {
     };
 
     return (
-        <div className="shadow m-2 p-2">
+        <div className="shadow m-2 p-2  max-w-xs">
             <div className='flex flex-row justify-between'>
-                <h1 className="font-title capitalize text-xl">{task.title}</h1>
+                {task.completed ? <h1 className="font-title capitalize text-xl ">{task.title}</h1>:
+                                  <h1 className="font-title capitalize text-xl line-through ">{task.title}</h1>
+                }
                 <button onClick={clickHandler}>
                     <UilCheckCircle size="25" className={!task.completed ? "fill-green" : "fill-forth-color"} />
-                    
+
                 </button>
             </div>
             <h1 className="text-lg font-font">{task.description}</h1>
@@ -27,11 +29,11 @@ const TaskCard = ({ task }) => {
             <footer className={`flex flex-row ${task.date ? 'justify-between' : 'justify-end'} mt-4`}>
                 {task.date && <div className='flex flex-row font-font gap-1'><UilSchedule size="25" className="fill-second-color" /> {task.date}</div>}
                 <div className='flex flex-row justify-end gap-2'>
-                    <UilBookmark size="25" color={
-                        (task.importance === 'high') ? "#a83237" :
-                            (task.importance === 'medium') ? "#ff8408" :
-                                (task.importance === 'low') ? "#179f4c" : ''
-                    } />
+                    {task.importance && <UilBookmark size="25" className={
+                        (task.importance === 'high') ? "fill-red" :
+                            (task.importance === 'medium') ? "fill-orange" :
+                                (task.importance === 'low') ? "fill-green" : ''
+                    } />}
 
                     <button onClick={() => {
                         dispatch(deletTask(task.key))

@@ -16,7 +16,7 @@ const ModalWindow = () => {
     const dateEdit = isEditTask ? taskEditing.date : ''
     const importanceEdit = isEditTask ? taskEditing.importance : ''
     const key = isEditTask ? taskEditing.key : ''
-    const completed = isEditTask ? taskEditing.completed : ''
+    const completed = isEditTask ? taskEditing.completed = true : false
     console.log(errors)
     const onSubmit = (data) => {
         if (isEditTask) {
@@ -53,6 +53,7 @@ const ModalWindow = () => {
                     </header>
                     <div className=" flex flex-col">
                         <span className="capitalize text-primary-color font-title">title</span>
+                        {errors.title && <p className="bg-white text-red"> * title is required</p>}
                         <input className="border my-1 p-1 rounded-sm mb-3"
                             type={'text'}
                             placeholder='Title'
@@ -60,7 +61,7 @@ const ModalWindow = () => {
                             defaultValue={titleEdit}                           
                             {...register("title", { required: true, maxLength: 20 })}
                         />
-                        {errors.title && <p className="bg-white text-red">title is required</p>}
+                        
 
                         <span className="capitalize text-primary-color font-title">description</span>
                         <textarea className="border my-1 p-1 rounded-sm mb-3"

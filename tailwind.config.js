@@ -10,7 +10,7 @@ module.exports = {
       'title': ['Montserrat Alternates'],
     },
     colors: {
-      'red' : '#a83237',
+      'red' : '#dc2626',
       'orange' : '#ff8408',
       'green': '#179f4c',
       'black' : "#000000",

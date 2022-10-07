@@ -1,16 +1,19 @@
 import Button from "../../components/button";
-import { UilCheckCircle } from '@iconscout/react-unicons'
+import { UilCheckCircle, UilApps, UilListUl } from '@iconscout/react-unicons'
 import ModalWindow from "../../components/modal-window";
 import { useDispatch, useSelector } from "react-redux";
 import { setOpenModal } from '../../redux/modal-slice/index';
 import TaskCard from "../../components/task-card";
 import StatusBar from "../../components/status-bar";
+import { setFormat } from "../../redux/format-slice";
 
 
 const CompletedPage = () => {
     const openModal = useSelector(state => state.modal.openModal);
     const taskCompleted = useSelector(state => state.task.taskList);
+    const format = useSelector(state => state.format.format);
     const dispatch = useDispatch();
+
     const completedTasks = taskCompleted.filter(task => task.completed).map(task => <TaskCard task={task} />);
 
     return (
@@ -20,6 +23,16 @@ const CompletedPage = () => {
                     <UilCheckCircle size="40" className="fill-third-color" />
                     completed tasks
                     <StatusBar />
+                    <button onClick={() => {
+                        dispatch(setFormat('grid'))
+                    }}>
+                        <UilApps size="20" className="fill-forth-color ml-3 " />
+                    </button>
+                    <button onClick={() => {
+                        dispatch(setFormat('list'))
+                    }}>
+                        <UilListUl size="20" className="fill-forth-color " />
+                    </button>
                 </div>
                 <Button handleOnClick={() => {
                     dispatch(setOpenModal(true))
@@ -28,9 +41,14 @@ const CompletedPage = () => {
 
             {openModal && <ModalWindow />}
 
-            <div className="grid grid-cols-2 ml-5 mr-20">
-                {completedTasks}
-            </div>
+            {(format === 'grid') ? 
+                <div className="grid grid-cols-3 ml-5 mr-20">
+                    {completedTasks}
+                </div>: 
+                <div className="flex flex-col ml-5 mr-20 w-1/2">
+                    {completedTasks}
+                </div>
+            }
 
         </div>
     )

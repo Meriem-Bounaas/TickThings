@@ -11,15 +11,13 @@ const GridListView = () => {
             <button onClick={() => {
                 dispatch(setFormat('grid'))
             }}>
-                <UilApps size="22" className={(format==='grid')?"fill-second-color ml-3 ":
-                                                                "fill-primary-color ml-3 " }
+                <UilApps size="22" className={` ml-3 ${format==='grid'?'fill-second-color':'fill-primary-color'}`}
                 />
             </button>
             <button onClick={() => {
                 dispatch(setFormat('list'))
             }}>
-                <UilListUl size="30" className={(format==='list')?"fill-second-color ml-3 ":
-                                                                "fill-primary-color ml-3 "}
+                <UilListUl size="30" className={` ml-3 ${format==='list'?'fill-second-color':'fill-primary-color'}`}
                  />
             </button>
         </div>

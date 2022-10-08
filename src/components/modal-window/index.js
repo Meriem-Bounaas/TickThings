@@ -33,6 +33,10 @@ const ModalWindow = () => {
         dispatch(setOpenModal(false))
     }
 
+    const handleKeyPress = (e)=>{
+        if (e.key === 'Enter') handleSubmit(onSubmit)()
+    }
+
     return (
         <div className="absolute top-0 left-0 bg-primary-color w-screen h-screen flex align-middle modal">
             <div className="w-1/3 h-fit bg-white rounded-sm flex flex-col m-auto justify-between p-4  ">
@@ -64,6 +68,7 @@ const ModalWindow = () => {
                             autoFocus={true}
                             defaultValue={titleEdit}                           
                             {...register("title", { required: true, maxLength: 20 })}
+                            onKeyDown={handleKeyPress}
                         />
                         
 
@@ -73,6 +78,7 @@ const ModalWindow = () => {
                             placeholder={t("descreption")}
                             defaultValue={descriptionEdit}                           
                             {...register("description")}
+                            onKeyDown={handleKeyPress}
                         />
 
                         <span className="capitalize text-primary-color font-title">{t("date")}</span>

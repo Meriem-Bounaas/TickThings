@@ -1,8 +1,8 @@
 # About the Project:
  todo list application: it helps you to manage your personal and professional productivity.
 
- [Live Demo](https://weather-iapv.vercel.app/)
- <img src="./src/media/html.jpg">
+ [Live Demo](https://todo-list-psi-ten.vercel.app/)
+ <img src="./src/media/app.png">
 
  ## Features:
 1. Create, edit, and remove tasks

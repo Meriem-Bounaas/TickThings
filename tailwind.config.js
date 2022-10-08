@@ -9,18 +9,20 @@ module.exports = {
       'logo': ['Yellowtail', 'cursive'],
       'title': ['Montserrat Alternates'],
     },
-    colors: {
-      'red' : '#dc2626',
-      'orange' : '#ff8408',
-      'green': '#179f4c',
-      'black' : "#000000",
-      'white' : "#ffffff",
-      'primary-color' : '#1e293b',
-      'second-color'  : '#1d4ed8',
-      'third-color'   : '#d1d5db',
-      'forth-color' : '#6d7075'
+    
+    extend: {
+      colors: {
+        red : 'var(--red)',
+        orange : 'var(--orange)',
+        green: 'var(--green)',
+        black : 'var(--black)',
+        white : 'var(--white)',
+        "primary-color" : 'var(--primary-color)',
+        "second-color"  : 'var(--second-color)',
+        "third-color"   : 'var(--third-color)',
+        "forth-color": 'var(--forth-color)'
+      },
     },
-    extend: {},
   },
   plugins: [],
 }

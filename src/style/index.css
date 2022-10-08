@@ -4,6 +4,18 @@
 
 
 
+#root{
+  --red : #dc2626;
+  --orange : #ff8408;
+  --green: #179f4c;
+  --black : #000000;
+  --white : #ffffff;
+  --primary-color : #1e293b;
+  --second-color  : #1d4ed8;
+  --third-color   : #d1d5db;
+  --forth-color : #6d7075;
+}
+
 #holder{
     background: white;
     padding: 10px;
@@ -17,7 +29,7 @@
   }
 .button {
     /* background: #3D4C53; */
-    background-color: #6d7075;
+    background-color: var(--forth-color);
     height : 35px;
     overflow: hidden;
     text-align : center;
@@ -32,8 +44,8 @@
     width : 200px;
     height : 110px;
     margin-top: -100px;
-    padding-top: 2px;
-    background : #1d4ed8;
+    padding-top: 2px;    
+    background-color: var(--second-color) ;
     left : -250px;
     transition : .3s;
     display: flex;

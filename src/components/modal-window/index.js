@@ -3,8 +3,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { setOpenModal } from '../../redux/modal-slice/index.js';
 import { addTask, changeTask, isEditTAsk } from '../../redux/task-slice/index';
 import Button from "../button";
+import { v4 as uuidv4 } from 'uuid';
+import { useTranslation } from "react-i18next";
 
 const ModalWindow = () => {
+    const { t } = useTranslation();
     const { register, formState: { errors }, handleSubmit } = useForm();
 
     const isEditTask = useSelector(state => state.task.isEditTAsk)
@@ -15,17 +18,17 @@ const ModalWindow = () => {
     const descriptionEdit = isEditTask ? taskEditing.description : ''
     const dateEdit = isEditTask ? taskEditing.date : ''
     const importanceEdit = isEditTask ? taskEditing.importance : ''
-    const key = isEditTask ? taskEditing.key : ''
+    const key = isEditTask ? taskEditing.key : uuidv4()
     
     const onSubmit = (data) => {
         if (isEditTask) {
             dispatch(changeTask({ ...data }))
             dispatch(isEditTAsk(false))
-            localStorage[key]=data
         }
         else {
             dispatch(addTask({ ...data }))
-            localStorage.setItem('5',{...data})
+            localStorage.setItem(data.key, JSON.stringify(data))
+
         }
         dispatch(setOpenModal(false))
     }
@@ -53,41 +56,41 @@ const ModalWindow = () => {
                         </button>
                     </header>
                     <div className=" flex flex-col">
-                        <span className="capitalize text-primary-color font-title">title</span>
-                        {errors.title && <p className="bg-white text-red capitalize"> * title is required</p>}
+                        <span className="capitalize text-primary-color font-title">{t("title")}</span>
+                        {errors.title && <p className="bg-white text-red capitalize"> {t("* title is required")}</p>}
                         <input className="border my-1 p-1 rounded-sm mb-3"
                             type={'text'}
-                            placeholder='Title'
+                            placeholder={t("title")}
                             autoFocus={true}
                             defaultValue={titleEdit}                           
                             {...register("title", { required: true, maxLength: 20 })}
                         />
                         
 
-                        <span className="capitalize text-primary-color font-title">description</span>
+                        <span className="capitalize text-primary-color font-title">{t("description")}</span>
                         <textarea className="border my-1 p-1 rounded-sm mb-3"
                             rows={6}
-                            placeholder='Descreption'
+                            placeholder={t("descreption")}
                             defaultValue={descriptionEdit}                           
                             {...register("description")}
                         />
 
-                        <span className="capitalize text-primary-color font-title">date picker</span>
+                        <span className="capitalize text-primary-color font-title">{t("date")}</span>
                         <input className="border-b my-1 w-1/2 mb-3"
                             type={'date'}
                             defaultValue={dateEdit}
                             {...register("date")}
                         />
 
-                        <span className="capitalize text-primary-color font-title">importance</span>
+                        <span className="capitalize text-primary-color font-title">{t("importance")}</span>
                         <select className="border-b my-1 w-1/2"
                             defaultValue={importanceEdit}
                             {...register("importance")}
                         >
                             <option value=''></option>
-                            <option value='high'>high</option>
-                            <option value='medium'>medium</option>
-                            <option value='low'>lower</option>
+                            <option value='high'>{t("high")}</option>
+                            <option value='medium'>{t("medium")}</option>
+                            <option value='low'>{t("low")}</option>
                         </select>
 
                     </div>

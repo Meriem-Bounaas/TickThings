@@ -4,11 +4,26 @@ import { Outlet } from "react-router-dom";
 import src from './media/todo.png';
 import { useTranslation } from "react-i18next";
 import Translate from './components/translate';
+import { useEffect } from 'react';
+import { addTask } from './redux/task-slice';
+import { useDispatch } from 'react-redux';
 
 function App() {
 
+  const keyList =  []
   const { t } = useTranslation();
-  
+  const dispatch = useDispatch()
+
+  useEffect(()=>{
+    const tasks = Object.entries(localStorage)        
+    tasks.forEach(task => {   
+      if(!keyList.find(e=>e === task[0])) {
+        dispatch(addTask(JSON.parse(task[1])));
+        keyList.push(task[0])
+      }
+    });    
+  }, [])
+
   return (
     <div className="flex flex-col h-screen font-font">
       <div className='flex flex-row border-b-2 border-third-color'>

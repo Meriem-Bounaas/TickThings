@@ -1,12 +1,12 @@
 import Button from "../../components/button";
-import { UilCheckCircle, UilApps, UilListUl } from '@iconscout/react-unicons'
+import { UilCheckCircle } from '@iconscout/react-unicons'
 import ModalWindow from "../../components/modal-window";
 import { useDispatch, useSelector } from "react-redux";
 import { setOpenModal } from '../../redux/modal-slice/index';
 import TaskCard from "../../components/task-card";
 import StatusBar from "../../components/status-bar";
-import { setFormat } from "../../redux/format-slice";
 import { useTranslation } from "react-i18next";
+import GridListView from "../../components/grid-list-view";
 
 
 const CompletedPage = () => {
@@ -26,16 +26,7 @@ const CompletedPage = () => {
                     <UilCheckCircle size="40" className="fill-third-color" />
                     {t("completed tasks")}
                     <StatusBar />
-                    <button onClick={() => {
-                        dispatch(setFormat('grid'))
-                    }}>
-                        <UilApps size="20" className="fill-forth-color ml-3 " />
-                    </button>
-                    <button onClick={() => {
-                        dispatch(setFormat('list'))
-                    }}>
-                        <UilListUl size="20" className="fill-forth-color " />
-                    </button>
+                    <GridListView />
                 </div>
                 <Button handleOnClick={() => {
                     dispatch(setOpenModal(true))
@@ -44,11 +35,11 @@ const CompletedPage = () => {
 
             {openModal && <ModalWindow />}
 
-            {(format === 'grid') ? 
-                <div className="grid grid-cols-3 ml-5 mr-20">
+            {(format === 'grid') ?
+                <div className="grid grid-cols-3 ml-24 mr-24">
                     {completedTasks}
-                </div>: 
-                <div className="flex flex-col ml-5 mr-20 w-1/2">
+                </div> :
+                <div className="flex flex-col ml-24 w-2/3">
                     {completedTasks}
                 </div>
             }

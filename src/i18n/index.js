@@ -17,6 +17,14 @@ const resources = {
       "tasks": "tasks",
       "inProgress": "inProgress",
       "Save task": "Save task",
+      "title": "title",
+      "* title is required":"* title is required",
+      "description": "description",
+      "date picker": "date picker",
+      "importance": "importance",
+      "high": "high",
+      "medium": "medium",
+      "lower": "lower"
     }
   },
   fr: {
@@ -31,6 +39,14 @@ const resources = {
       "tasks": "taches",
       "inProgress": "enCours",
       "Save task": "enregistrer la tâche",
+      "title": "titre",
+      "* title is required": "* le titre est requis",
+      "description": "description",
+      "date": "date",
+      "importance": "importance",
+      "high": "élevé",
+      "medium": "moyen",
+      "low": "plus bas"
     }
   }
 };

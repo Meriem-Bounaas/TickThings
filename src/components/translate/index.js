@@ -1,4 +1,5 @@
 import { useTranslation } from "react-i18next";
+import { UilGlobe  } from '@iconscout/react-unicons'
 
 const Translate = () => {
     const { i18n } = useTranslation();
@@ -8,7 +9,8 @@ const Translate = () => {
         else i18n.changeLanguage('en')
     }
     return (
-        <div className='pt-6 pr-10 text-primary-color font-font'>
+        <div className='pt-6 pr-10 text-primary-color font-font flex flex-row items-center gap-2'>
+            <UilGlobe  size="22" className="fill-second-color"/>
             <select name="language" onChange={OnchangeHandle}>
                 <option>EN</option>
                 <option>FR</option>

@@ -1,12 +1,12 @@
 import Button from "../../components/button";
 import ModalWindow from "../../components/modal-window";
-import { UilClipboardNotes, UilApps, UilListUl } from '@iconscout/react-unicons';
+import { UilClipboardNotes } from '@iconscout/react-unicons';
 import TaskCard from '../../components/task-card/index.js'
 import { useDispatch, useSelector } from "react-redux";
 import { setOpenModal } from '../../redux/modal-slice/index'
 import StatusBar from "../../components/status-bar";
-import { setFormat } from "../../redux/format-slice";
 import { useTranslation } from "react-i18next";
+import GridListView from "../../components/grid-list-view";
 
 const PrincipalePage = () => {
     const { t } = useTranslation();
@@ -15,7 +15,6 @@ const PrincipalePage = () => {
     const taskList = useSelector(state => state.task.taskList)
     const format = useSelector(state => state.format.format)
     const dispatch = useDispatch()
-    
     const allTasks = taskList.map(task => <TaskCard task={task} />)
 
     return (
@@ -25,16 +24,7 @@ const PrincipalePage = () => {
                     <UilClipboardNotes size="40" className="fill-third-color" />
                     {t("all tasks")}
                     <StatusBar />
-                    <button onClick={() => {
-                        dispatch(setFormat('grid'))
-                    }}>
-                        <UilApps size="20" className="fill-forth-color ml-3 " />
-                    </button>
-                    <button onClick={() => {
-                        dispatch(setFormat('list'))
-                    }}>
-                        <UilListUl size="20" className="fill-forth-color " />
-                    </button>
+                    <GridListView />
                 </div>
                 <Button handleOnClick={() => {
                     dispatch(setOpenModal(true))
@@ -43,15 +33,14 @@ const PrincipalePage = () => {
 
             {openModal && <ModalWindow />}
 
-            {(format === 'grid') ? 
-                <div className="grid grid-cols-3 ml-5 mr-20">
+            {(format === 'grid') ?
+                <div className="grid grid-cols-3 ml-24 mr-24">
                     {allTasks}
-                </div>: 
-                <div className="flex flex-col ml-5 mr-20 w-1/2">
+                </div> :
+                <div className="flex flex-col ml-24 w-2/3">
                     {allTasks}
                 </div>
             }
-
         </div>
     )
 }

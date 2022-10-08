@@ -3,7 +3,7 @@ import { createSlice } from '@reduxjs/toolkit'
 export const FormatSlice = createSlice({
   name: 'format',
   initialState: {
-    format: "liste"
+    format: "list"
   },
   reducers: {
     setFormat: (state, action) => {

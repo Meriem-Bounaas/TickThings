@@ -9,6 +9,7 @@ import InProgressPage from './pages/in-progress-page';
 import PrincipalePage from './pages/principale-page';
 import { store } from './redux/store/index.js'
 import { Provider } from 'react-redux'
+import './i18n/index.js';
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));

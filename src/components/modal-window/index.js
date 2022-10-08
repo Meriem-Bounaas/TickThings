@@ -16,8 +16,7 @@ const ModalWindow = () => {
     const dateEdit = isEditTask ? taskEditing.date : ''
     const importanceEdit = isEditTask ? taskEditing.importance : ''
     const key = isEditTask ? taskEditing.key : ''
-    const completed = isEditTask ? taskEditing.completed = true : false
-    console.log(errors)
+
     const onSubmit = (data) => {
         if (isEditTask) {
             dispatch(changeTask({ ...data }))
@@ -40,7 +39,7 @@ const ModalWindow = () => {
                     />
                     <input
                         type={'hidden'}
-                        defaultValue={completed}
+                        defaultValue={false}
                         {...register("completed")}
                     />
                     <header className="flex flex-row justify-end p-2 text-second-color font-title text-xl ">
@@ -53,7 +52,7 @@ const ModalWindow = () => {
                     </header>
                     <div className=" flex flex-col">
                         <span className="capitalize text-primary-color font-title">title</span>
-                        {errors.title && <p className="bg-white text-red"> * title is required</p>}
+                        {errors.title && <p className="bg-white text-red capitalize"> * title is required</p>}
                         <input className="border my-1 p-1 rounded-sm mb-3"
                             type={'text'}
                             placeholder='Title'
@@ -91,7 +90,7 @@ const ModalWindow = () => {
 
                     </div>
                     <footer className="flex flex-row justify-end">
-                        <Button text={isEditTask ? 'save task' : 'add task'} />
+                        <Button text={isEditTask ? 'Save task': 'Add task'} />
                     </footer>
                 </form>
             </div>

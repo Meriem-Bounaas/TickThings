@@ -4,7 +4,6 @@ import { useDispatch } from 'react-redux';
 import { deletTask, getTaskEditing, isEditTAsk, toggleCompleted } from '../../redux/task-slice';
 import { setOpenModal } from '../../redux/modal-slice';
 
-
 const TaskCard = ({ task }) => {
     const [colorBtn, setColorBtn] = useState(false)
     const dispatch = useDispatch()
@@ -13,6 +12,10 @@ const TaskCard = ({ task }) => {
         dispatch(toggleCompleted(task.key));
     };
 
+    const descriptionLength = (description)=>{
+      if(description.length < 45) return description
+      else return `${description.slice(0,45)}...`
+    }
     return (
         <div className="shadow m-2 p-2  max-w-xs">
             <div className='flex flex-row justify-between'>
@@ -24,7 +27,7 @@ const TaskCard = ({ task }) => {
 
                 </button>
             </div>
-            <h1 className="text-lg font-font">{task.description}</h1>
+            <h1 className="text-lg font-font">{descriptionLength(task.description)}</h1>
 
             <footer className={`flex flex-row ${task.date ? 'justify-between' : 'justify-end'} mt-4`}>
                 {task.date && <div className='flex flex-row font-font gap-1'><UilSchedule size="25" className="fill-second-color" /> {task.date}</div>}

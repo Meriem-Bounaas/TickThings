@@ -17,7 +17,7 @@ const TaskCard = ({ task }) => {
       else return `${description.slice(0,45)}...`
     }
     return (
-        <div className="shadow m-2 p-2  max-w-xs">
+        <div className="shadow m-2 p-2  max-w-xs h-36">
             <div className='flex flex-row justify-between'>
                 {task.completed ? <h1 className="font-title capitalize text-xl ">{task.title}</h1>:
                                   <h1 className="font-title capitalize text-xl line-through ">{task.title}</h1>

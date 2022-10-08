@@ -16,14 +16,16 @@ const ModalWindow = () => {
     const dateEdit = isEditTask ? taskEditing.date : ''
     const importanceEdit = isEditTask ? taskEditing.importance : ''
     const key = isEditTask ? taskEditing.key : ''
-
+    
     const onSubmit = (data) => {
         if (isEditTask) {
             dispatch(changeTask({ ...data }))
             dispatch(isEditTAsk(false))
+            localStorage[key]=data
         }
         else {
             dispatch(addTask({ ...data }))
+            localStorage.setItem('5',{...data})
         }
         dispatch(setOpenModal(false))
     }
@@ -90,7 +92,7 @@ const ModalWindow = () => {
 
                     </div>
                     <footer className="flex flex-row justify-end">
-                        <Button text={isEditTask ? 'Save task': 'Add task'} />
+                        <Button text={isEditTask ? 'Save task': 'Add task'}/>
                     </footer>
                 </form>
             </div>

@@ -1,5 +1,5 @@
 # About the Project:
- todo list application: it helps you to manage your personal and professional productivity.
+ todo list application: it helps you to manage your personal and professional productivity tasks.
 
  [Live Demo](https://todo-list-psi-ten.vercel.app/)
  <img src="./src/media/app.png">
@@ -13,8 +13,7 @@
  ## Technologies Used:
 <img src="./src/media/react.png"  width="100" height="100"><img src="./src/media/redux.jpeg"  width="100" height="100"><img src="./src/media/tailwind.jpg"  width="100" height="100"><img src="./src/media/html.jpg"  width="100" height="100">
   
-  ## Library Used:
-  1. i18next 
-  2. UUID
-  3. local storage API
-  4. react hook form
+  1. UUID
+  2. localstorage API
+  3. react-hook-form
+  4. react-i18next

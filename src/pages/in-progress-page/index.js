@@ -7,9 +7,13 @@ import TaskCard from "../../components/task-card";
 import StatusBar from "../../components/status-bar";
 import { useTranslation } from "react-i18next";
 import GridListView from "../../components/grid-list-view";
+import { Navigate } from "react-router-dom";
+import AuthContext from "../../auth-context";
+import { useContext } from "react";
 
 const InProgressPage = () => {
     const { t } = useTranslation();
+    const { user } = useContext(AuthContext);
 
     const openModal = useSelector(state => state.modal.openModal)
     const taskInProgress = useSelector(state => state.task.taskList)
@@ -17,6 +21,10 @@ const InProgressPage = () => {
     const dispatch = useDispatch()
     
     const inProgressTasks = taskInProgress.filter(task => task.completed).map(task => <TaskCard task={task} />)
+
+    if (!user) {
+        return <Navigate replace to="/" />;
+    }
 
     return (
         <div className="flex flex-col w-full">

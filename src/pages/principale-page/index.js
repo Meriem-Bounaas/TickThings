@@ -7,15 +7,23 @@ import { setOpenModal } from '../../redux/modal-slice/index'
 import StatusBar from "../../components/status-bar";
 import { useTranslation } from "react-i18next";
 import GridListView from "../../components/grid-list-view";
+import { Navigate } from "react-router-dom";
+import { useContext } from "react";
+import AuthContext from "../../auth-context";
 
 const PrincipalePage = () => {
     const { t } = useTranslation();
+    const { user } = useContext(AuthContext);
 
     const openModal = useSelector(state => state.modal.openModal)
     const taskList = useSelector(state => state.task.taskList)
     const format = useSelector(state => state.format.format)
     const dispatch = useDispatch()
     const allTasks = taskList.map(task => <TaskCard task={task} />)
+
+    if (!user) {
+        return <Navigate replace to="/" />;
+    }
 
     return (
         <div className="flex flex-col w-full">

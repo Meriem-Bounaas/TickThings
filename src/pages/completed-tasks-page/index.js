@@ -7,10 +7,15 @@ import TaskCard from "../../components/task-card";
 import StatusBar from "../../components/status-bar";
 import { useTranslation } from "react-i18next";
 import GridListView from "../../components/grid-list-view";
+import { useContext } from "react";
+import AuthContext from "../../auth-context";
+import { Navigate } from "react-router-dom";
 
 
 const CompletedPage = () => {
     const { t } = useTranslation();
+    const { user } = useContext(AuthContext);
+
 
     const openModal = useSelector(state => state.modal.openModal);
     const taskCompleted = useSelector(state => state.task.taskList);
@@ -18,6 +23,11 @@ const CompletedPage = () => {
     const dispatch = useDispatch();
 
     const completedTasks = taskCompleted.filter(task => !task.completed).map(task => <TaskCard task={task} />);
+    console.log(user);
+
+    if (!user) {
+        return <Navigate replace to="/" />;
+    }
 
     return (
         <div className="flex flex-col w-full">

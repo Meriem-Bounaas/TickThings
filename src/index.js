@@ -10,23 +10,30 @@ import PrincipalePage from './pages/principale-page';
 import { store } from './redux/store/index.js'
 import { Provider } from 'react-redux'
 import './i18n/index.js';
+import Login from './pages/login-page';
+import { AuthProvider } from './auth-provider';
+import SignUp from './pages/sign-up';
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-   <React.StrictMode>
+  <React.StrictMode>
     <Provider store={store}>
-        <BrowserRouter>
-            <Routes>
-                <Route path="/" element={<App/>}>
-                  <Route path="/" element={<PrincipalePage/>} />
-                  <Route path="completed" element={<CompletedPage/>} />
-                  <Route path="inprogress" element={<InProgressPage/>} />
-                </Route>
-            </Routes>    
+      <BrowserRouter>
+        <AuthProvider>
+          <Routes>
+            <Route path="/" element={<Login />} />
+            <Route path="/signup" element={<SignUp />} />
+            <Route path="/dashboard" element={<App />}>
+              <Route index element={<PrincipalePage />} />
+              <Route path="completed" element={<CompletedPage />} />
+              <Route path="inprogress" element={<InProgressPage />} />
+            </Route>
+          </Routes>
+        </AuthProvider>
       </BrowserRouter>
     </Provider>
-   </React.StrictMode>
+  </React.StrictMode>
 );
 
 // If you want to start measuring performance in your app, pass a function

@@ -6,6 +6,7 @@ import { Link, Navigate, useNavigate } from "react-router-dom";
 import src from '../../media/todo-background.jpg';
 import { UilEye, UilEyeSlash } from '@iconscout/react-unicons'
 import AuthContext from "../../auth-context";
+import { useTranslation } from "react-i18next";
 
 const Login = () => {
     const { register, formState: { errors }, handleSubmit } = useForm();
@@ -13,6 +14,8 @@ const Login = () => {
     const [showPassword, setShowPassword] = useState(false)
     const { user } = useContext(AuthContext);
     const [errorMessage,setErrorMessage] = useState()
+    const { t } = useTranslation();
+
 
     const login = async (data) => {
         try {
@@ -37,7 +40,7 @@ const Login = () => {
             <div className="w-1/2 h-full">
                 <form onSubmit={handleSubmit(login)} className="flex flex-col mt-40 items-center">
                     <span className="font-logo text-5xl mb-14 capitalize w-1/2 text-center text-primary-color">todo list </span>
-                    {errorMessage && <div className=" w-1/2 text-center text-second-color text-2xl">{errorMessage}</div>}
+                    {errorMessage && <div className=" w-1/2 text-center text-second-color text-2xl">{t(errorMessage)}</div>}
                     <span className="font-font text-lg capitalize w-1/2 text-sixth-color mt-3">email </span>
                     <input type={"email"}
                         placeholder={"email@mail"}
@@ -51,7 +54,7 @@ const Login = () => {
                         autoFocus={true}
                         className="border-2 border-solid w-1/2 rounded-sm h-12 text-xl mb-4 px-2"
                     />
-                    {errors.email && <p className="bg-white text-red w-1/2 mb-5"> * Email is not valid </p>}
+                    {errors.email && <p className="bg-white text-red w-1/2 mb-5"> {t("* Email is not valid")} </p>}
                     <span className="font-font text-lg capitalize w-1/2 text-sixth-color">password</span>
                     <div className="w-1/2 rounded-sm border-2 border-solid h-12 border-third-color mb-4">
                         <input type={showPassword ? "text" : "password"}
@@ -87,12 +90,12 @@ const Login = () => {
                         </button>
                     </div>
 
-                    {errors.password && <p className="bg-white text-red w-1/2 mb-5">* Password is not valid</p>}
+                    {errors.password && <p className="bg-white text-red w-1/2 mb-5">{t("* Password is not valid")}</p>}
                     <button className="capitalize mt-2 bg-primary-color w-1/2 rounded-sm h-10 text-2xl text-white" >
-                        log in
+                        {t('log in')}
                     </button>
                     <p className="text-primary-color mt-3">
-                        Don't have an account? <Link to="/signup" className="text-second-color">Sign up for free</Link>
+                        {t("Don't have an account?")} <Link to="/signup" className="text-second-color">{t("Sign up for free")}</Link>
                     </p>
                 </form>
             </div>

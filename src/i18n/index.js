@@ -24,7 +24,20 @@ const resources = {
       "importance": "importance",
       "high": "high",
       "medium": "medium",
-      "lower": "lower"
+      "lower": "lower",
+      "log in":"log in",
+      "Don't have an account?": "Don't have an account?",
+      "Sign up for free": "Sign up for free",
+      "* Email is not valid": "* Email is not valid",
+      "* Password is not valid" : "* Password is not valid",
+      "user not found !" : "user not found !",
+      "Create an account" : "Create an account",
+      "Password": "Password",
+      "Confirm Password": "Confirm Password",
+      "Create account": "Create account",
+      "Sign up with google": "Sign up with google",
+      "Email already used!" : "Email already used!"
+
     }
   },
   fr: {
@@ -46,7 +59,19 @@ const resources = {
       "importance": "importance",
       "high": "élevé",
       "medium": "moyen",
-      "low": "plus bas"
+      "low": "plus bas",
+      "log in":"connexion",
+      "Don't have an account?": "Vous n'avez pas de compte?",
+      "Sign up for free": "Inscrivez-vous gratuitement",
+      "* Email is not valid": "* L'email n'est pas valide",
+      "* Password is not valid" : "*Le mot de passe n'est pas valide",
+      "user not found !" : "utilisateur non trouvé !",
+      "Create an account" : "Créer un compte",
+      "Password": "Mot de passe",
+      "Confirm Password": "Confirmez le mot de passe",
+      "Create account": "Créer un compte",
+      "Sign up with google": "Inscrivez-vous avec Google",
+      "Email already used!" : "Adresse e-Mail déjà utilisée!"
     }
   }
 };

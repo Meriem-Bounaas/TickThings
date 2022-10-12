@@ -5,6 +5,10 @@ import { addTask, changeTask, isEditTAsk } from '../../redux/task-slice/index';
 import Button from "../button";
 import { v4 as uuidv4 } from 'uuid';
 import { useTranslation } from "react-i18next";
+import { addDoc, collection } from "firebase/firestore";
+import { db } from "../../firebase-config.js";
+import { useContext } from "react";
+import AuthContext from "../../auth-context/index.js";
 
 const ModalWindow = () => {
     const { t } = useTranslation();
@@ -13,27 +17,47 @@ const ModalWindow = () => {
     const isEditTask = useSelector(state => state.task.isEditTAsk)
     const taskEditing = useSelector(state => state.task.editTask)
     const dispatch = useDispatch()
+    const { user } = useContext(AuthContext);
 
     const titleEdit = isEditTask ? taskEditing.title : ''
     const descriptionEdit = isEditTask ? taskEditing.description : ''
     const dateEdit = isEditTask ? taskEditing.date : ''
     const importanceEdit = isEditTask ? taskEditing.importance : ''
     const key = isEditTask ? taskEditing.key : uuidv4()
-    
+
+    const addTodoInServer = async (data) => {
+        try {
+            const docRef = await addDoc(collection(db, "todos"), {
+                user : user.uid,
+                key: data.key,
+                completed: data.completed,
+                title: data.title,
+                description: data.description,
+                date: data.date,
+                importance: data.importance                    
+            });
+            if (docRef) {
+                dispatch(addTask({ ...data }))
+                console.log(docRef.id);
+            }
+        } catch (e) {
+            console.error(e);
+        }
+    }
+
     const onSubmit = (data) => {
         if (isEditTask) {
             dispatch(changeTask({ ...data }))
             dispatch(isEditTAsk(false))
         }
         else {
-            dispatch(addTask({ ...data }))
-            localStorage.setItem(data.key, JSON.stringify(data))
-
+            addTodoInServer(data)
+            // localStorage.setItem(data.key, JSON.stringify(data))
         }
         dispatch(setOpenModal(false))
     }
 
-    const handleKeyPress = (e)=>{
+    const handleKeyPress = (e) => {
         if (e.key === 'Enter') handleSubmit(onSubmit)()
     }
 
@@ -66,17 +90,17 @@ const ModalWindow = () => {
                             type={'text'}
                             placeholder={t("title")}
                             autoFocus={true}
-                            defaultValue={titleEdit}                           
+                            defaultValue={titleEdit}
                             {...register("title", { required: true, maxLength: 20 })}
                             onKeyDown={handleKeyPress}
                         />
-                        
+
 
                         <span className="capitalize text-primary-color font-title">{t("description")}</span>
                         <textarea className="border my-1 p-1 rounded-sm mb-3"
                             rows={6}
                             placeholder={t("descreption")}
-                            defaultValue={descriptionEdit}                           
+                            defaultValue={descriptionEdit}
                             {...register("description")}
                             onKeyDown={handleKeyPress}
                         />
@@ -101,7 +125,7 @@ const ModalWindow = () => {
 
                     </div>
                     <footer className="flex flex-row justify-end">
-                        <Button text={isEditTask ? 'Save task': 'Add task'}/>
+                        <Button text={isEditTask ? 'Save task' : 'Add task'} />
                     </footer>
                 </form>
             </div>

@@ -20,7 +20,9 @@ module.exports = {
         "primary-color" : 'var(--primary-color)',
         "second-color"  : 'var(--second-color)',
         "third-color"   : 'var(--third-color)',
-        "forth-color": 'var(--forth-color)'
+        "forth-color": 'var(--forth-color)',
+        "fivth-color": 'var(--fivth-color)',
+        "sixth-color": 'var(--sixth-color)'
       },
     },
   },

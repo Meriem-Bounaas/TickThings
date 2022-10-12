@@ -5,7 +5,7 @@ import { addTask, changeTask, isEditTAsk } from '../../redux/task-slice/index';
 import Button from "../button";
 import { v4 as uuidv4 } from 'uuid';
 import { useTranslation } from "react-i18next";
-import { addDoc, collection } from "firebase/firestore";
+import { setDoc, doc } from "firebase/firestore";
 import { db } from "../../firebase-config.js";
 import { useContext } from "react";
 import AuthContext from "../../auth-context/index.js";
@@ -27,7 +27,7 @@ const ModalWindow = () => {
 
     const addTodoInServer = async (data) => {
         try {
-            const docRef = await addDoc(collection(db, "todos"), {
+             await setDoc(doc(db, "todos", data.key), {
                 user : user.uid,
                 key: data.key,
                 completed: data.completed,
@@ -36,24 +36,35 @@ const ModalWindow = () => {
                 date: data.date,
                 importance: data.importance                    
             });
-            if (docRef) {
-                dispatch(addTask({ ...data }))
-                console.log(docRef.id);
-            }
+                dispatch(addTask({ ...data }))            
         } catch (e) {
             console.error(e);
         }
     }
 
+    const modifyTaskToServer = async  (data) => {
+        try {
+            await setDoc(doc(db, "todos", data.key), {               
+               completed: data.completed,
+               title: data.title,
+               description: data.description,
+               date: data.date,
+               importance: data.importance                    
+           }, { merge: true });
+           dispatch(changeTask({ ...data }))
+           dispatch(isEditTAsk(false))
+           
+       } catch (e) {
+           console.error(e);
+       }
+    }
+
     const onSubmit = (data) => {
-        if (isEditTask) {
-            dispatch(changeTask({ ...data }))
-            dispatch(isEditTAsk(false))
-        }
-        else {
+        if (isEditTask) 
+            modifyTaskToServer(data)            
+        else 
             addTodoInServer(data)
-            // localStorage.setItem(data.key, JSON.stringify(data))
-        }
+            
         dispatch(setOpenModal(false))
     }
 

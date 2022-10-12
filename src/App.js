@@ -6,51 +6,59 @@ import { useTranslation } from "react-i18next";
 import Translate from './components/translate';
 import { useContext, useEffect } from 'react';
 import { addTask } from './redux/task-slice';
-import { useDispatch } from 'react-redux';
+import { ReactReduxContext, useDispatch } from 'react-redux';
 import LogOut from './components/log-out';
 import AuthContext from './auth-context';
 import { db } from './firebase-config';
 import { collection, getDocs, query, where } from 'firebase/firestore';
 
 function App() {
-  // const keyList = []
+  const keyList = []
   const { t } = useTranslation();
   const dispatch = useDispatch();
   const { user } = useContext(AuthContext);
 
-  //  ==========> load all tasks
-  // const loadTasks = async () => {
-  //   const tasks = await getDocs(collection(db, "todos"));
-  //   tasks.forEach(task => {
-  //     console.log(task.data())
-  //     if (!keyList.find(e => e === task.data().key)) {
-  //         dispatch(addTask(task.data()));
-  //           keyList.push(task.data().key)
-  //       }
+  //  ==========> load tasks from local storage
+  const loadFromLocalStorage = () => {
+    const tasks = Object.entries(localStorage)
+    tasks.forEach(task => {
+      if (!keyList.find(e => e === task[0])) {
+        dispatch(addTask(JSON.parse(task[1])));
+        keyList.push(task[0])
+      }
+    });
+  }
 
-  //   });
-  // }
+  //  ==========> load all tasks
+  const loadTasks = async () => {
+    const tasks = await getDocs(collection(db, "todos"));
+    tasks.forEach(task => {
+      if (!keyList.find(e => e === task.data().key)) {
+        dispatch(addTask(task.data()));
+        keyList.push(task.data().key)
+      }
+
+    });
+  }
 
   // ============> load tasks by user
   const loadTasksByUser = async () => {
-    const querry =  query(collection(db, "todos"), where("user", "==", user.uid));
-    if(querry){
-    const querySnapshot = await getDocs(querry);
-    querySnapshot.forEach((task) => {
-      dispatch(addTask(task.data()));
-    });}
+    if (!user)
+      return;
+    const myquery = query(collection(db, "todos"), where("user", "==", user.uid));
+    if (myquery) {
+      const querySnapshot = await getDocs(myquery);
+      querySnapshot.forEach((task) => {
+        if (!keyList.find(e => e === task.data().key)) {
+          dispatch(addTask(task.data()));
+          keyList.push(task.data().key)
+        }
+      });
+    }
   }
 
   useEffect(() => {
-    //  ================>   use localStorage 
-    // const tasks = Object.entries(localStorage)
-    // tasks.forEach(task => {
-    //   if (!keyList.find(e => e === task[0])) {
-    //     dispatch(addTask(JSON.parse(task[1])));
-    //     keyList.push(task[0])
-    //   }
-    // });
-
+    // loadFromLocalStorage();
     // loadTasks();
     loadTasksByUser();
   }, [])

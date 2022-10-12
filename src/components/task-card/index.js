@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { deletTask, getTaskEditing, isEditTAsk, toggleCompleted } from '../../redux/task-slice';
 import { setOpenModal } from '../../redux/modal-slice';
-import { deleteDoc, doc, getDoc, getDocs } from "firebase/firestore";
+import { deleteDoc, doc, getDoc } from "firebase/firestore";
 import { db } from '../../firebase-config';
 
 const TaskCard = ({ task }) => {
@@ -20,26 +20,26 @@ const TaskCard = ({ task }) => {
     }
 
     const deletTaskServer = async () => {
-        const doc = await getDoc(db, "todos").filter(doc => doc.key === task.key);
-        console.log(doc);
-        //   await deleteDoc(doc(db, "todos", doc)); 
-
+        // const doc = await getDoc(db, "todos").filter(doc => doc.key === task.key);
+        // console.log(doc);
+        await deleteDoc(doc(db, "todos", task.key));
+        dispatch(deletTask(task.key))
     }
 
     const handleDelete = () => {
         // localStorage.removeItem(task.key)
-        deletTaskServer()
-        // dispatch(deletTask(task.key))
+        deletTaskServer()  
     }
 
-    const handleEdit = () => {
+    const handleEdit = 
+    () => {
         dispatch(getTaskEditing(task.key))
         dispatch(isEditTAsk(true))
         dispatch(setOpenModal(true))
     }
 
     return (
-        <div className="shadow m-2 p-2 w-fulls h-36">
+        <div key={task.key} className="shadow m-2 p-2 w-fulls h-36">
             <div className='flex flex-row justify-between'>
                 <h1 className={`font-title capitalize text-xl text-primary-color ${!task.completed ? 'line-through' : ''}`} >{task.title}</h1>
                 <button onClick={clickHandler}  >

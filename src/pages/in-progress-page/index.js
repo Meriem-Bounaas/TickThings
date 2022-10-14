@@ -7,23 +7,28 @@ import TaskCard from "../../components/task-card";
 import StatusBar from "../../components/status-bar";
 import { useTranslation } from "react-i18next";
 import GridListView from "../../components/grid-list-view";
-import { Navigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import AuthContext from "../../auth-context";
 import { useContext } from "react";
+import ReactLoading from 'react-loading';
+
 
 const InProgressPage = () => {
     const { t } = useTranslation();
     const { user } = useContext(AuthContext);
+    const isLoading = useSelector(state => state.loading.isLoading)
+    const navigate = useNavigate();
+
 
     const openModal = useSelector(state => state.modal.openModal)
     const taskInProgress = useSelector(state => state.task.taskList)
     const format = useSelector(state => state.format.format)
     const dispatch = useDispatch()
-    
+
     const inProgressTasks = taskInProgress.filter(task => task.completed).map(task => <TaskCard task={task} />)
 
     if (!user) {
-        return <Navigate replace to="/" />;
+        navigate("/")
     }
 
     return (
@@ -41,16 +46,12 @@ const InProgressPage = () => {
             </div>
 
             {openModal && <ModalWindow setOpenModal={setOpenModal} />}
-                
-            {(format === 'grid') ? 
-                <div className="grid grid-cols-3 ml-24 mr-24">
-                    {inProgressTasks}
-                </div>: 
-                <div className="flex flex-col ml-24 w-2/3">
-                    {inProgressTasks}
-                </div>
-            }
-            
+
+            <div className={`ml-24 ${(format === 'grid') ? 'grid grid-cols-3 mr-24' : 'flex flex-col w-2/3'} `}>
+                {isLoading && <ReactLoading type={'spin'} color={'#385a64'} height={300} width={100} className="ml-96 mt-28" />}
+                {inProgressTasks}
+            </div>
+
         </div>
     )
 }

@@ -36,7 +36,8 @@ const resources = {
       "Confirm Password": "Confirm Password",
       "Create account": "Create account",
       "Sign up with google": "Sign up with google",
-      "Email already used!" : "Email already used!"
+      "Email already used!" : "Email already used!",
+      "password": "password",
 
     }
   },
@@ -71,7 +72,8 @@ const resources = {
       "Confirm Password": "Confirmez le mot de passe",
       "Create account": "Créer un compte",
       "Sign up with google": "Inscrivez-vous avec Google",
-      "Email already used!" : "Adresse e-Mail déjà utilisée!"
+      "Email already used!" : "Adresse e-Mail déjà utilisée!",
+      "password": "mot de passe"
     }
   }
 };

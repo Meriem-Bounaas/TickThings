@@ -3,12 +3,15 @@ import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { deletTask, getTaskEditing, isEditTAsk, toggleCompleted } from '../../redux/task-slice';
 import { setOpenModal } from '../../redux/modal-slice';
-import { deleteDoc, doc, getDoc } from "firebase/firestore";
+import { deleteDoc, doc } from "firebase/firestore";
 import { db } from '../../firebase-config';
+import 'react-toastify/dist/ReactToastify.css';
+import {isNotify} from "../../redux/notify-slice/index.js"
 
 const TaskCard = ({ task }) => {
     const [colorBtn, setColorBtn] = useState(false)
     const dispatch = useDispatch()
+
     const clickHandler = () => {
         setColorBtn(!colorBtn);
         dispatch(toggleCompleted(task.key));
@@ -20,23 +23,22 @@ const TaskCard = ({ task }) => {
     }
 
     const deletTaskServer = async () => {
-        // const doc = await getDoc(db, "todos").filter(doc => doc.key === task.key);
-        // console.log(doc);
         await deleteDoc(doc(db, "todos", task.key));
         dispatch(deletTask(task.key))
+        dispatch(isNotify("task deleted"))
     }
 
     const handleDelete = () => {
         // localStorage.removeItem(task.key)
-        deletTaskServer()  
+        deletTaskServer()
     }
 
-    const handleEdit = 
-    () => {
-        dispatch(getTaskEditing(task.key))
-        dispatch(isEditTAsk(true))
-        dispatch(setOpenModal(true))
-    }
+    const handleEdit =
+        () => {
+            dispatch(getTaskEditing(task.key))
+            dispatch(isEditTAsk(true))
+            dispatch(setOpenModal(true))
+        }
 
     return (
         <div key={task.key} className="shadow m-2 p-2 w-fulls h-36">
@@ -68,6 +70,5 @@ const TaskCard = ({ task }) => {
         </div>
     )
 }
-
 
 export default TaskCard; 

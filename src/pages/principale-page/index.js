@@ -7,13 +7,14 @@ import { setOpenModal } from '../../redux/modal-slice/index'
 import StatusBar from "../../components/status-bar";
 import { useTranslation } from "react-i18next";
 import GridListView from "../../components/grid-list-view";
-import { Navigate } from "react-router-dom";
-import { useContext } from "react";
-import AuthContext from "../../auth-context";
+import ReactLoading from 'react-loading';
+
 
 const PrincipalePage = () => {
     const { t } = useTranslation();
-    const { user } = useContext(AuthContext);
+    // const { user } = useContext(AuthContext);
+    const isLoading = useSelector(state => state.loading.isLoading)
+    // const navigate = useNavigate();
 
     const openModal = useSelector(state => state.modal.openModal)
     const taskList = useSelector(state => state.task.taskList)
@@ -21,9 +22,7 @@ const PrincipalePage = () => {
     const dispatch = useDispatch()
     const allTasks = taskList.map(task => <TaskCard task={task} />)
 
-    if (!user) {
-        return <Navigate replace to="/" />;
-    }
+    
 
     return (
         <div className="flex flex-col w-full">
@@ -41,16 +40,13 @@ const PrincipalePage = () => {
 
             {openModal && <ModalWindow />}
 
-            {(format === 'grid') ?
-                <div className="grid grid-cols-3 ml-24 mr-24">
-                    {allTasks}
-                </div> :
-                <div className="flex flex-col ml-24 w-2/3">
-                    {allTasks}
-                </div>
-            }
+            <div className={`ml-24 ${(format === 'grid') ? 'grid grid-cols-3 mr-24' : 'flex flex-col w-2/3'} `}>
+                {isLoading && <ReactLoading type={'spin'} color={'#385a64'} height={300} width={100} className="ml-96 mt-28" />}
+                {allTasks}
+            </div>
         </div>
     )
 }
+
 
 export default PrincipalePage;

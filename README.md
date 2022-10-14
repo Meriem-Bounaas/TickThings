@@ -11,9 +11,13 @@
 4. tasks are saved using localStorage
 
  ## Technologies Used:
-<img src="./src/media/react.png"  width="100" height="100"><img src="./src/media/redux.jpeg"  width="100" height="100"><img src="./src/media/tailwind.jpg"  width="100" height="100"><img src="./src/media/html.jpg"  width="100" height="100">
-  
-  1. UUID
-  2. localstorage API
-  3. react-hook-form
-  4. react-i18next
+   
+  1. reatJs
+  2. Redux-Toolkit
+  3. Tawilwind 
+  4. React-router
+  5. UUID
+  6. localstorage API
+  7. react-hook-form
+  8. react-i18next
+  9. react-toastify

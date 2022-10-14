@@ -9,7 +9,7 @@ const Translate = () => {
         else i18n.changeLanguage('en')
     }
     return (
-        <div className='pt-6 pr-10  flex flex-row items-center gap-2'>
+        <div className='pt-6 flex flex-row  gap-2 pb-3'>
             <UilGlobe  size="22" className="fill-primary-color"/>
             <select name="language" onChange={OnchangeHandle} className="text-primary-color font-font cursor-pointer">
                 <option>EN</option>

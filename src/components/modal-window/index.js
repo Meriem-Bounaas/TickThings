@@ -9,6 +9,8 @@ import { setDoc, doc } from "firebase/firestore";
 import { db } from "../../firebase-config.js";
 import { useContext } from "react";
 import AuthContext from "../../auth-context/index.js";
+import {isNotify} from "../../redux/notify-slice/index.js"
+
 
 const ModalWindow = () => {
     const { t } = useTranslation();
@@ -27,44 +29,47 @@ const ModalWindow = () => {
 
     const addTodoInServer = async (data) => {
         try {
-             await setDoc(doc(db, "todos", data.key), {
-                user : user.uid,
+            await setDoc(doc(db, "todos", data.key), {
+                user: user.uid,
                 key: data.key,
                 completed: data.completed,
                 title: data.title,
                 description: data.description,
                 date: data.date,
-                importance: data.importance                    
+                importance: data.importance
             });
-                dispatch(addTask({ ...data }))            
-        } catch (e) {
-            console.error(e);
+            
+            dispatch(isNotify("task added succesufuly"))
+            dispatch(addTask({ ...data }))
+        } catch (error) {
+            dispatch(isNotify("task not saved"))
         }
     }
 
-    const modifyTaskToServer = async  (data) => {
+    const modifyTaskToServer = async (data) => {
         try {
-            await setDoc(doc(db, "todos", data.key), {               
-               completed: data.completed,
-               title: data.title,
-               description: data.description,
-               date: data.date,
-               importance: data.importance                    
-           }, { merge: true });
-           dispatch(changeTask({ ...data }))
-           dispatch(isEditTAsk(false))
-           
-       } catch (e) {
-           console.error(e);
-       }
+            await setDoc(doc(db, "todos", data.key), {
+                completed: data.completed,
+                title: data.title,
+                description: data.description,
+                date: data.date,
+                importance: data.importance
+            }, { merge: true });
+            dispatch(isNotify("task changed"))
+            dispatch(changeTask({ ...data }))
+            dispatch(isEditTAsk(false))
+
+        } catch (error) {
+            dispatch(isNotify("task not changed"))
+        }
     }
 
     const onSubmit = (data) => {
-        if (isEditTask) 
-            modifyTaskToServer(data)            
-        else 
+        if (isEditTask)
+            modifyTaskToServer(data)
+        else
             addTodoInServer(data)
-            
+
         dispatch(setOpenModal(false))
     }
 

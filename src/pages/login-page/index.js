@@ -1,50 +1,64 @@
 import { useForm } from "react-hook-form";
-import { signInWithEmailAndPassword } from "firebase/auth"
+import { GoogleAuthProvider, signInWithEmailAndPassword, signInWithPopup } from "firebase/auth"
 import { auth } from '../../firebase-config'
 import { useContext, useState } from "react";
-import { Link , useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import src from '../../media/todo-background.jpg';
 import { UilEye, UilEyeSlash } from '@iconscout/react-unicons'
 import AuthContext from "../../auth-context";
 import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
-import { isNotify } from "../../redux/notify-slice/index.js"
+import { isMessage, isNotify } from "../../redux/notify-slice/index.js"
 import NotificationSystem from "../../components/notification-system";
+import logo from '../../media/todo.png';
+import google from '../../media/google.png'
+
 
 
 const Login = () => {
     const { register, formState: { errors }, handleSubmit } = useForm();
-    const navigate = useNavigate();
     const [showPassword, setShowPassword] = useState(false)
     const { user } = useContext(AuthContext);
     const { t } = useTranslation();
     const dispatch = useDispatch();
-   
+    const navigate = useNavigate();
+
     const login = async (data) => {
         try {
             await signInWithEmailAndPassword(auth, data.email, data.password)
+            navigate("/dashboard")
         } catch (error) {
             switch (error.code) {
                 case 'auth/user-not-found':
                     dispatch(isNotify('user not found !'))
-                    break;  
-                default: dispatch(isNotify('password not valid !'));
+                    break;
+                default: dispatch(isNotify('password not valide !'));
             }
         }
     }
 
-    if (user) {
-        navigate("/dashboard")
+    const signInGoogle = async () => {
+        const provider = new GoogleAuthProvider();
+        try {
+            const response = await signInWithPopup(auth, provider);
+            GoogleAuthProvider.credentialFromResult(response);
+            navigate("/dashboard");
+        } catch (error) {
+
+        }
     }
 
     return (
-        <div className="flex flex-row w-screen h-screen">
-            <div className="w-1/2 h-full">
-                <form onSubmit={handleSubmit(login)} className="flex flex-col mt-40 items-center">
-                    <span className="font-logo text-5xl mb-14 capitalize w-1/2 text-center text-primary-color">todo list </span>
-                    <span className="font-font text-lg capitalize w-1/2 text-sixth-color mt-3">email </span>
-                    <input type={"email"}
-                        placeholder={"email@mail"}
+        <div className="flex w-screen h-screen flex-col md:flex-row">
+            <div className="h-full w-full md:w-1/2 flex flex-col justify-center ">
+                <div className="flex flex-row items-baseline gap-2   justify-center">
+                    <img src={logo} alt="img" className='w-8 h-8 visible md:invisible' />
+                    <span className="font-logo text-4xl capitalize text-center text-primary-color mb-10 md:mb-14 md:mr-10 md:text-3xl lg:text-5xl">todo list </span>
+                </div>
+                <form onSubmit={handleSubmit(login)} className="flex flex-col items-start my-0 lg:mx-24 mx-6 md:mx-10">
+                    <span className="font-font text-lg capitalize  text-sixth-color mt-3">email </span>
+                    <input typinve={"email"}
+                        placeholdier={"email@mail"}
                         {...register("email",
                             {
                                 required: "required",
@@ -53,11 +67,11 @@ const Login = () => {
                                 }
                             })}
                         autoFocus={true}
-                        className="border-2 border-solid w-1/2 rounded-sm h-12 text-xl mb-4 px-2"
+                        className="border-2 border-solid  rounded-sm h-12 text-xl mb-4 px-2 w-full"
                     />
-                    {errors.email && <p className="bg-white text-red w-1/2 mb-5"> {t("* Email is not valide")} </p>}
-                    <span className="font-font text-lg capitalize w-1/2 text-sixth-color">{t("password")}</span>
-                    <div className="w-1/2 rounded-sm border-2 border-solid h-12 border-third-color mb-4">
+                    {errors.email && <p className="bg-white text-red  mb-5"> {t("* Email is not valide")} </p>}
+                    <span className="font-font text-lg capitalize  text-sixth-color">{t("password")}</span>
+                    <div className=" rounded-sm border-2 border-solid h-12 border-third-color mb-4  w-full">
                         <input type={showPassword ? "text" : "password"}
                             placeholder={"******"}
                             {...register("password",
@@ -88,19 +102,31 @@ const Login = () => {
                         </button>
                     </div>
 
-                    {errors.password && <p className="bg-white text-red w-1/2 mb-5">{t("* Password is not valid")}</p>}
-                    <button className="capitalize mt-2 bg-primary-color w-1/2 rounded-sm h-10 text-2xl text-white" >
+                    {errors.password && <p className="bg-white text-red  mb-5">{t("* Password is not valid")}</p>}
+                    <button className="capitalize mb-4 mt-2 bg-primary-color rounded-full h-12 text-xl text-white md:text-2xl md:w-3/4 w-full my-0 mx-auto " >
                         {t('log in')}
                     </button>
-                    <p className="text-primary-color mt-3">
-                        {t("Don't have an account?")} <Link to="/signup" className="text-second-color">{t("Sign up for free")}</Link>
-                    </p>
                 </form>
+                <div className="flex justify-center flex-col md:pb-1  my-0 lg:mx-24 mx-6 md:mx-10 ">
+                    <button className={`text-primary-color  rounded-full h-12 font-semibold text-sm border-third-color md:text-2xl my-0 w-full border-solid
+                                        border-2 flex flex-row justify-center gap-1 pr-2 pl-2 items-center lg:font-font lg:text-xl md:w-3/4 md:mx-auto`}
+                        onClick={signInGoogle}
+                    >
+                        <img src={google} alt="img" className='w-6' />
+                        {t("Sign In with google")}
+                    </button>
+                <p className="w-3/4 text-primary-color text-center flex flex-col justify-center md:flex-col md:w-3/4 mx-auto my-4">
+                        {t("Don't have an account?")}
+                        <Link to="/signup" className="text-second-color">
+                            {t("Sign up for free")}
+                        </Link>
+                    </p>
+                </div>
             </div>
-            <div className="w-1/2 h-full">
+            <div className="hidden md:h-full md:block md:w-1/2">
                 <img src={src} alt="todo.img" className="h-full" />
             </div>
-            <NotificationSystem/>
+            <NotificationSystem />
         </div>
     )
 }

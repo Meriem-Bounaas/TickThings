@@ -9,7 +9,7 @@ import { setDoc, doc } from "firebase/firestore";
 import { db } from "../../firebase-config.js";
 import { useContext } from "react";
 import AuthContext from "../../auth-context/index.js";
-import {isNotify} from "../../redux/notify-slice/index.js"
+import { isNotify } from "../../redux/notify-slice/index.js"
 
 
 const ModalWindow = () => {
@@ -28,6 +28,7 @@ const ModalWindow = () => {
     const key = isEditTask ? taskEditing.key : uuidv4()
 
     const addTodoInServer = async (data) => {
+        console.log(data);
         try {
             await setDoc(doc(db, "todos", data.key), {
                 user: user.uid,
@@ -38,7 +39,7 @@ const ModalWindow = () => {
                 date: data.date,
                 importance: data.importance
             });
-            
+
             dispatch(isNotify("task added succesufuly"))
             dispatch(addTask({ ...data }))
         } catch (error) {
@@ -49,7 +50,7 @@ const ModalWindow = () => {
     const modifyTaskToServer = async (data) => {
         try {
             await setDoc(doc(db, "todos", data.key), {
-                completed: data.completed,
+                // completed: data.completed,
                 title: data.title,
                 description: data.description,
                 date: data.date,
@@ -73,13 +74,13 @@ const ModalWindow = () => {
         dispatch(setOpenModal(false))
     }
 
-    const handleKeyPress = (e) => {
-        if (e.key === 'Enter') handleSubmit(onSubmit)()
-    }
+    // const handleKeyPress = (e) => {
+    //     if (e.key === 'Enter') handleSubmit(onSubmit)()
+    // }    
 
     return (
-        <div className="absolute top-0 left-0 bg-primary-color w-screen h-screen flex align-middle modal">
-            <div className="w-1/3 h-fit bg-white rounded-sm flex flex-col m-auto justify-between p-4  ">
+        <div className="z-10 lg:z-10 absolute top-0 left-0 bg-primary-color w-screen h-screen flex align-middle modal">
+            <div className="w-full h-full lg:w-1/3 lg:h-fit bg-white rounded-sm flex flex-col m-auto lg:justify-between p-4 justify-center  ">
                 <form onSubmit={handleSubmit(onSubmit)}>
                     <input
                         type={'hidden'}
@@ -108,7 +109,7 @@ const ModalWindow = () => {
                             autoFocus={true}
                             defaultValue={titleEdit}
                             {...register("title", { required: true, maxLength: 20 })}
-                            onKeyDown={handleKeyPress}
+                            // onKeyDown={handleKeyPress}
                         />
 
 
@@ -118,18 +119,18 @@ const ModalWindow = () => {
                             placeholder={t("descreption")}
                             defaultValue={descriptionEdit}
                             {...register("description")}
-                            onKeyDown={handleKeyPress}
+                            // onKeyDown={handleKeyPress}
                         />
 
                         <span className="capitalize text-primary-color font-title">{t("date")}</span>
-                        <input className="border-b my-1 w-1/2 mb-3"
+                        <input className="border-b my-1 w-3/4 lg:w-1/2 mb-8 h-10  lg:mb-3"
                             type={'date'}
                             defaultValue={dateEdit}
                             {...register("date")}
                         />
 
                         <span className="capitalize text-primary-color font-title">{t("importance")}</span>
-                        <select className="border-b my-1 w-1/2"
+                        <select className="border-b my-1 w-3/4 lg:w-1/2 h-10 "
                             defaultValue={importanceEdit}
                             {...register("importance")}
                         >
@@ -140,7 +141,7 @@ const ModalWindow = () => {
                         </select>
 
                     </div>
-                    <footer className="flex flex-row justify-end">
+                    <footer className="flex flex-row lg:justify-end justify-center">
                         <Button text={isEditTask ? 'Save task' : 'Add task'} />
                     </footer>
                 </form>

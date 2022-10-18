@@ -7,7 +7,7 @@ const GridListView = () => {
     const format = useSelector(state=> state.format.format)
 
     return (
-        <div className='flex gap-1'>
+        <div className='hidden lg:block gap-1'>
             <button onClick={() => {
                 dispatch(setFormat('grid'))
             }}>

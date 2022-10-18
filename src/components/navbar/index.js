@@ -7,22 +7,23 @@ const Navbar = () => {
     const { t } = useTranslation();
     let location = useLocation();
 
-    return ( 
-        <nav className='flex flex-col gap-8 text-lg font-semibold text-primaryColor capitalize w-full'>
-            <Link to="/dashboard" className={`flex flex-row items-center gap-1 hover:text-thirdColor w-full  pl-8 hover:text-second-color ${location.pathname==="/dashboard"?'text-second-color border-r-4 border-second-color ':'text-primary-color'}`}>
-                <UilClipboardNotes size="20" className="fill-second-color" />
-                {t("all tasks")}
+    return (
+        <nav className='flex flex-row gap-4 justify-center font-semibold text-primaryColor capitalize lg:flex-col w-full'>
+            <Link to="/dashboard" className={`buttonNav lg:mb-4 flex flex-col w-1/3 lg:flex-row items-center gap-1 hover:text-thirdColor lg:w-full lg:pl-10 hover:text-second-color ${location.pathname === "/dashboard" ? 'lg:text-second-color lg:border-r-4 lg:border-second-color ' : 'text-primary-color'}`}>
+                <UilClipboardNotes className="fill-second-color" />
+                <div className='lg:text-lg text-xs text-center lg:text-start'>{t("all tasks")}</div>
             </Link>
-            <Link to="/dashboard/completed" className={`flex flex-row items-center gap-1 hover:text-thirdColor w-full pl-8 hover:text-second-color ${location.pathname==="/dashboard/completed"?'text-second-color border-r-4 border-second-color ':'text-primary-color'}`}>
-                <UilCheckCircle size="20" className="fill-second-color" />
-                {t("completed")}
+            <Link to="/dashboard/completed" className={`buttonNav lg:mb-4 flex flex-col w-1/3 lg:flex-row bord items-center gap-1 hover:text-thirdColor lg:w-full lg:pl-10 hover:text-second-color ${location.pathname === "/dashboard/completed" ? 'lg:text-second-color lg:border-r-4 lg:border-second-color ' : 'text-primary-color'}`}>
+                <UilCheckCircle className="fill-second-color" />
+                <div className='lg:text-lg text-xs text-center lg:text-start'>{t("completed")}</div>
             </Link>
-            <Link to="/dashboard/inprogress" className={`flex flex-row items-center gap-1 hover:text-thirdColor w-full pl-8 hover:text-second-color ${location.pathname==="/dashboard/inprogress"?'text-second-color border-r-4 border-second-color ':'text-primary-color'}`}>
-                <UilStopwatch size="20" className="fill-second-color" />
-                {t("in progress")}
+            <Link to="/dashboard/inprogress" className={`buttonNav flex flex-col w-1/3 lg:flex-row items-center gap-1 hover:text-thirdColor lg:w-full lg:pl-10 hover:text-second-color  ${location.pathname === "/dashboard/inprogress" ? 'lg:text-second-color lg:border-r-4 lg:border-second-color ' : 'text-primary-color'}`}>
+                <UilStopwatch className="fill-second-color" />
+                <div className='lg:text-lg text-xs text-center lg:text-start'>{t("in progress")}</div>
             </Link>
         </nav>
     )
 }
+
 
 export default Navbar;

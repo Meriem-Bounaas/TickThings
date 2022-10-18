@@ -8,7 +8,7 @@ import CompletedPage from './pages/completed-tasks-page';
 import InProgressPage from './pages/in-progress-page';
 import PrincipalePage from './pages/principale-page';
 import { store } from './redux/store/index.js'
-import { Provider } from 'react-redux'
+import { Provider, useSelector } from 'react-redux'
 import './i18n/index.js';
 import Login from './pages/login-page';
 import { AuthProvider } from './auth-provider';
@@ -18,11 +18,8 @@ import AuthContext from './auth-context';
 
 const AuthComponent =() => {
   const { user } = useContext(AuthContext);
-  const navigate = useNavigate()
-   //console.log('zzz');
-   
+     
   if (user) {
-    navigate('/dashboard')
     return (
       <Routes>
         <Route path="/dashboard" element={<App />}>

@@ -11,8 +11,8 @@ const Translate = () => {
     return (
         <div className='pt-6 flex flex-row  gap-2 pb-3'>
             <UilGlobe  size="22" className="fill-primary-color"/>
-            <select name="language" onChange={OnchangeHandle} className="text-primary-color font-font cursor-pointer">
-                <option>EN</option>
+            <select name="language" onChange={OnchangeHandle} className="text-primary-color font-font cursor-pointer text-sm lg:text-lg">
+                <option className="mt-8 lg:mt-0">EN</option>
                 <option>FR</option>
             </select>
         </div>

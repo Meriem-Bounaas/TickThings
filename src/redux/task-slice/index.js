@@ -6,6 +6,7 @@ export const TaskSlice = createSlice({
     taskList: [],
     editTask: {},
     isEditTAsk: false,
+    completed:false,
   },
   reducers: {
     addTask: (state, action) => {
@@ -16,7 +17,7 @@ export const TaskSlice = createSlice({
     },
     toggleCompleted: (state, action) => {
       const element = state.taskList.find(e => e.key === action.payload)
-      element.completed = !element.completed
+      element.completed= !element.completed
     },
     getTaskEditing: (state, action) => {
       state.editTask = state.taskList.find(e => e.key === action.payload)
@@ -30,9 +31,12 @@ export const TaskSlice = createSlice({
       task.description = action.payload.description
       task.date = action.payload.date
       task.importance = action.payload.importance
+    },
+    clearAllTask: (state, action) =>{
+      state.taskList = []
     }
   },
 })
 
-export const { addTask, deletTask, toggleCompleted, getTaskEditing, isEditTAsk, changeTask } = TaskSlice.actions
+export const { addTask, deletTask, toggleCompleted, getTaskEditing, isEditTAsk, changeTask, clearAllTask } = TaskSlice.actions
 export default TaskSlice.reducer

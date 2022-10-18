@@ -1,22 +1,28 @@
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useSelector, useDispatch } from 'react-redux';
-import { isNotify } from '../../redux/notify-slice';
+import { isMessage, isNotify } from '../../redux/notify-slice';
 import { useEffect } from 'react';
-
 
 const NotificationSystem = () => {
   const dispatch = useDispatch();
   const notify = useSelector(state => state.notify.notify)
+  const message = useSelector(state => state.notify.message)
+
+  if (notify) {
+    toast(notify);
+    dispatch(isNotify(""))
+  }
 
   useEffect(() => {
-    if (notify) {
-      toast(notify);
+    if (message) {
+      toast(message);
       setTimeout((() => {
-        dispatch(isNotify(''))
+        dispatch(isMessage(''))
       }, 1000))
     }
-  }, [notify])
+  }, [message])
+
 
   return (
     <ToastContainer />

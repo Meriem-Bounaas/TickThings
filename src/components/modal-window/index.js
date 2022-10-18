@@ -80,7 +80,7 @@ const ModalWindow = () => {
 
     return (
         <div className="z-10 lg:z-10 absolute top-0 left-0 bg-primary-color w-screen h-screen flex align-middle modal">
-            <div className="w-full h-full lg:w-1/3 lg:h-fit bg-white rounded-sm flex flex-col m-auto lg:justify-between p-4 justify-center  ">
+            <div className="w-full h-full lg:w-1/3 lg:h-fit bg-white rounded-sm flex flex-col m-auto lg:justify-between p-4">
                 <form onSubmit={handleSubmit(onSubmit)}>
                     <input
                         type={'hidden'}
@@ -92,7 +92,7 @@ const ModalWindow = () => {
                         defaultValue={false}
                         {...register("completed")}
                     />
-                    <header className="flex flex-row justify-end p-2 text-second-color font-title text-xl ">
+                    <header className="flex flex-row justify-end p-2 text-second-color font-title text-xl mt-4">
                         <button onClick={() => {
                             dispatch(setOpenModal(false))
                             dispatch(isEditTAsk(false))

@@ -37,39 +37,18 @@ const SignUp = () => {
         }
     }
 
-    // const signUpGoogle = async () => {
-    //     const provider = new GoogleAuthProvider();
-    //     try {
-    //         const response = await signInWithPopup(auth, provider);
-    //         dispatch(isMessage('sucess, your account has been created'))
-    //         GoogleAuthProvider.credentialFromResult(response);
-    //         navigate("/dashboard");
-    //     } catch (error) {
-    //         switch (error.code) {
-    //             case 'auth/email-already-in-use':
-    //                 dispatch(isNotify('Email already used!'))
-    //                 break;
-    //             default: break;
-    //         }
-    //     }
-    // }
-
-    // if (user) {
-    //     navigate("/dashboard");
-    // }
-
     return (
         <div className="flex flex-col w-screen h-screen md:flex-row">
             <div className="md:pt-12 pt-12">
-            <button className="md:ml-14 ml-8" onClick={() => {
+                <button className="md:ml-14 ml-8" onClick={() => {
                     navigate('/')
                 }}>
                     <UilArrowCircleLeft size="40" className="fill-second-color" />
                 </button>
             </div>
-            <div className="md:w-1/2 h-full flex flex-col justify-center ">
-                
-                <span className="font-font font-semibold mb-8 text-center text-xl text-primary-color mt-4 lg:text-3xl md:text-xl">
+            <div className="md:w-1/2 h-full flex flex-col md:justify-center md:mt-0 mt-10 ">
+
+                <span className="font-font font-semibold mb-8 text-center text-xl text-primary-color lg:text-3xl md:text-xl">
                     {t("Create an account")}
                 </span>
                 <form onSubmit={handleSubmit(signUp)} className="flex flex-col items-center md:mt-8 my-0 lg:mx-24 mx-6 md:mx-10 ">
@@ -125,16 +104,6 @@ const SignUp = () => {
                         {t("Create account")}
                     </button>
                 </form>
-
-                {/* <div className="flex justify-center my-0 lg:mx-24 mx-6 md:mx-10 pb-24 md:pb-1">
-                    <button className="text-primary-color w-full rounded-full h-12 font-semibold text-sm border-third-color border-solid border-2 flex flex-row justify-center gap-1 pr-2 pl-2 items-center lg:font-font lg:text-xl md:font-bold md:w-3/4 md:mx-auto"
-                        onClick={signUpGoogle}
-                    >
-                        <img src={google} alt="img" className='w-6' />
-                        {t("Sign up with google")}
-                    </button>
-                </div> */}
-
             </div>
             <div className="hidden md:w-1/2 md:h-full md:block">
                 <img src={src} alt="todo.img" className="h-full" />

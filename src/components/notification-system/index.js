@@ -3,6 +3,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import { useSelector, useDispatch } from 'react-redux';
 import { isMessage, isNotify } from '../../redux/notify-slice';
 import { useEffect } from 'react';
+import { t } from 'i18next';
 
 const NotificationSystem = () => {
   const dispatch = useDispatch();
@@ -10,7 +11,7 @@ const NotificationSystem = () => {
   const message = useSelector(state => state.notify.message)
 
   if (notify) {
-    toast(notify);
+    toast(t(notify));
     dispatch(isNotify(""))
   }
 

@@ -38,6 +38,18 @@ const resources = {
       "Sign up with google": "Sign up with google",
       "Email already used!" : "Email already used!",
       "password": "password",
+      "* Your password must be at least 8 characters":"* Your password must be at least 8 characters",
+      "* Email is not valide": "* Email is not valide",
+      "Sign in with Google": "Sign in with Google",
+      "password not valide !": "password not valide !",
+      "task added succesufuly" : "task added succesufuly",
+      "task not saved" : "task not saved",
+      "task changed" : "task changed",
+      "task not changed" : "task not changed",
+      "task non completed": "task incompleted" ,
+      "task completed": "task completed",
+      "error in server": "error in server",
+      "task deleted": "task deleted",
 
     }
   },
@@ -71,9 +83,21 @@ const resources = {
       "Password": "Mot de passe",
       "Confirm Password": "Confirmez le mot de passe",
       "Create account": "Créer un compte",
-      "Sign up with google": "Inscrivez-vous avec Google",
+      "Sign in with google": "Inscrivez-vous avec Google",
       "Email already used!" : "Adresse e-Mail déjà utilisée!",
-      "password": "mot de passe"
+      "password": "mot de passe",
+      "* Your password must be at least 8 characters": "* Votre mot de passe doit comporter au moins 8 caractères",
+      "* Email is not valide": "* L'email n'est pas valide",
+      "Sign in with Google": "Se connecter avec Google",
+      "password not valide !": "mot de passe n'est pas valide !",
+      "task added succesufuly" : "tâche ajoutée avec succès",
+      "task not saved" : "tâche non enregistrée",
+      "task changed" : "tâche modifiée",
+      "task not changed" : "tâche non modifiée",
+      "task non completed": "tâche non terminée" ,
+      "task completed": "tâche terminée",
+      "error in server": "erreur dans le serveur",
+      "task deleted": "tâche supprimée",
     }
   }
 };

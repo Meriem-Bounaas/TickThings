@@ -36,14 +36,14 @@ const LogOut = ({ emailUser }) => {
     return (
         <div className='z-10 pr-4'>
             <button
-                onFocus={handleClick}
+                onClick={handleClick}
                 onBlur= {handleBlur}
             >
                 <img src={src} alt="img" className='lg:w-11 md:w-14 w-28 rounded-full cursor-pointer' />
             </button>
-            {
+            {open &&
                 
-                    <div className={`absolute right-2 bg-slate-50 p-3 border-2 border-slate-100 flex flex-col gap-3 rounded-lg ${open?'visible':'invisible'}`}>
+                    <div className="absolute right-2 bg-slate-50 p-3 border-2 border-slate-100 flex flex-col gap-3 rounded-lg ">
                         <button className='cursor-default flex flex-row gap-1'>
                             <UilEnvelope size="25" className="fill-primary-color" />
                             {emailUser}

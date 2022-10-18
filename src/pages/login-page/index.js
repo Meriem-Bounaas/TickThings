@@ -50,7 +50,7 @@ const Login = () => {
 
     return (
         <div className="flex w-screen h-screen flex-col md:flex-row">
-            <div className="h-full w-full md:w-1/2 flex flex-col justify-center ">
+            <div className="h-full w-full md:w-1/2 flex flex-col md:justify-center md:mt-0 mt-20 ">
                 <div className="flex flex-row items-baseline gap-2   justify-center">
                     <img src={logo} alt="img" className='w-8 h-8 visible md:invisible' />
                     <span className="font-logo text-4xl capitalize text-center text-primary-color mb-10 md:mb-14 md:mr-10 md:text-3xl lg:text-5xl">todo list </span>
@@ -82,22 +82,17 @@ const Login = () => {
                             className=" text-xl w-full h-full px-2"
                         />
                         <button
-                            className="relative -top-7 right-2 float-right"
-                            onMouseDown={(e) => {
+                            className="relative -top-9 right-2 float-right"
+                            onClick={(e) => {
                                 e.preventDefault()
-                                setShowPassword(true)
-                            }}
-                            onMouseUp={(e) => {
-                                e.stopPropagation()
-                                e.preventDefault()
-                                setShowPassword(false)
+                                setShowPassword(!showPassword)
                             }}
                         >
                             {
                                 showPassword ?
-                                    <UilEyeSlash size="20" className="fill-primary-color" />
+                                    <UilEyeSlash size="25" className="fill-primary-color" />
                                     :
-                                    <UilEye size="20" className="fill-primary-color" />
+                                    <UilEye size="25" className="fill-primary-color" />
                             }
                         </button>
                     </div>
@@ -113,7 +108,7 @@ const Login = () => {
                         onClick={signInGoogle}
                     >
                         <img src={google} alt="img" className='w-6' />
-                        {t("Sign In with google")}
+                        {t("Sign in with Google")}
                     </button>
                 <p className="w-3/4 text-primary-color text-center flex flex-col justify-center md:flex-col md:w-3/4 mx-auto my-4">
                         {t("Don't have an account?")}

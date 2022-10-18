@@ -25,7 +25,7 @@ const TaskCard = ({ task }) => {
             await setDoc(doc(db, "todos", task.key), {
                 completed: !task.completed
             }, { merge: true });
-            (task.completed === true? dispatch(isNotify("task incompleted")): dispatch(isNotify("task completed")))
+            (task.completed === true? dispatch(isNotify("task non completed")): dispatch(isNotify("task completed")))
         } catch (error) {
             dispatch(isNotify("error in server"))
         }
@@ -57,7 +57,7 @@ const TaskCard = ({ task }) => {
     }
 
     return (
-        <div className="shadow m-2 p-3 lg:p-2 lg:w-11/12 h-40  hover:cursor-pointer">
+        <div className="shadow m-2 p-3 lg:p-2 lg:w-11/12 h-40 hover:cursor-pointer">
             <div className='flex flex-row justify-between'>
                 <h1 className={`font-title capitalize text-lg  lg:text-xl mb-3 text-primary-color ${task.completed===true ? 'line-through' : ''}`} >{task.title}</h1>
                 <button onClick={clickHandler}  >
@@ -67,11 +67,11 @@ const TaskCard = ({ task }) => {
             <p ref={myRef} className="text-lg font-font lg:h-8 h-6 overflow-hidden" onClick={handleEdit}>{descriptionLength(task.description)}</p>
 
             <footer className={`flex flex-col gap-2 lg:gap-0 lg:flex-row ${task.date ? 'justify-between' : 'justify-end'} mt-4`}>
-                {task.date && <div className='flex flex-row lg:text-base text-xs font-font gap-1 mb-2 lg:mb-0 items-end'>
+                {task.date && <div className='flex flex-row lg:text-base text-xs font-font gap-1 lg:mb-0 items-end'>
                     <UilSchedule size="25" className="fill-forth-color" />
                     {task.date}
                 </div>}
-                <div className='flex flex-row gap-6 justify-between lg:justify-end lg:gap-2 '>
+                <div className='flex flex-row gap-6 justify-between lg:justify-end lg:gap-2'>
                     {task.importance && <UilBookmark size="25" className={
                         (task.importance === 'high') ? "fill-red" :
                             (task.importance === 'medium') ? "fill-orange" :

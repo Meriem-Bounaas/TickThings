@@ -34,7 +34,7 @@ const SignUp = () => {
     }
 
     return (
-        <div className="flex flex-col w-screen h-screen md:flex-row">
+        <div className="flex flex-col w-screen h-screen md:flex-row fixed">
             <div className="md:pt-12 pt-12">
                 <button className="md:ml-14 ml-8" onClick={() => {
                     navigate('/')

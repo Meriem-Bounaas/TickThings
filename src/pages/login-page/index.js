@@ -50,7 +50,7 @@ const Login = () => {
     }
 
     return (
-        <div className="flex w-screen h-screen flex-col md:flex-row">
+        <div className="flex w-screen h-screen flex-col md:flex-row fixed">
             <div className="h-full w-full md:w-1/2 flex flex-col md:justify-center md:mt-0 mt-20 ">
                 <div className="flex flex-row items-baseline gap-2   justify-center">
                     <img src={logo} alt="img" className='w-8 h-8 visible md:invisible' />

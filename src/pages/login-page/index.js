@@ -1,14 +1,13 @@
 import { useForm } from "react-hook-form";
-import { GoogleAuthProvider, signInWithEmailAndPassword, signInWithPopup } from "firebase/auth"
+import { GoogleAuthProvider, signInWithEmailAndPassword, signInWithPopup, signInWithRedirect } from "firebase/auth"
 import { auth } from '../../firebase-config'
-import { useContext, useState } from "react";
+import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import src from '../../media/todo-background.jpg';
 import { UilEye, UilEyeSlash } from '@iconscout/react-unicons'
-import AuthContext from "../../auth-context";
 import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
-import { isMessage, isNotify } from "../../redux/notify-slice/index.js"
+import { isNotify } from "../../redux/notify-slice/index.js"
 import NotificationSystem from "../../components/notification-system";
 import logo from '../../media/todo.png';
 import google from '../../media/google.png'
@@ -18,7 +17,6 @@ import google from '../../media/google.png'
 const Login = () => {
     const { register, formState: { errors }, handleSubmit } = useForm();
     const [showPassword, setShowPassword] = useState(false)
-    const { user } = useContext(AuthContext);
     const { t } = useTranslation();
     const dispatch = useDispatch();
     const navigate = useNavigate();
@@ -40,11 +38,14 @@ const Login = () => {
     const signInGoogle = async () => {
         const provider = new GoogleAuthProvider();
         try {
-            const response = await signInWithPopup(auth, provider);
-            GoogleAuthProvider.credentialFromResult(response);
-            navigate("/dashboard");
+            // const response = await signInWithPopup(auth, provider);
+            // const credential = GoogleAuthProvider.credentialFromResult(response);
+            // const token = credential.accessToken;
+            // // The signed-in user info.
+            // const user = response.user;
+            signInWithRedirect(auth, provider);
         } catch (error) {
-
+           
         }
     }
 
@@ -110,7 +111,7 @@ const Login = () => {
                         <img src={google} alt="img" className='w-6' />
                         {t("Sign in with Google")}
                     </button>
-                <p className="w-3/4 text-primary-color text-center flex flex-col justify-center md:flex-col md:w-3/4 mx-auto my-4">
+                    <p className="w-3/4 text-primary-color text-center flex flex-col justify-center md:flex-col md:w-3/4 mx-auto my-4">
                         {t("Don't have an account?")}
                         <Link to="/signup" className="text-second-color">
                             {t("Sign up for free")}

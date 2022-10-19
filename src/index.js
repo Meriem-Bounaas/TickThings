@@ -1,19 +1,20 @@
-import React, { memo, useContext, useMemo } from 'react';
+import React, {  useContext } from 'react';
 import ReactDOM from 'react-dom/client';
 import './style/index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import { BrowserRouter, Route, Routes, useNavigate } from "react-router-dom";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import CompletedPage from './pages/completed-tasks-page';
 import InProgressPage from './pages/in-progress-page';
 import PrincipalePage from './pages/principale-page';
 import { store } from './redux/store/index.js'
-import { Provider, useSelector } from 'react-redux'
+import { Provider } from 'react-redux'
 import './i18n/index.js';
 import Login from './pages/login-page';
 import { AuthProvider } from './auth-provider';
 import SignUp from './pages/sign-up';
 import AuthContext from './auth-context';
+import PageNotFound from './pages/not-found-page';
 
 
 const AuthComponent =() => {
@@ -27,6 +28,7 @@ const AuthComponent =() => {
           <Route path="completed" element={<CompletedPage />} />
           <Route path="inprogress" element={<InProgressPage />} />
         </Route>
+        <Route path="*" element={<PageNotFound />} />
       </Routes>
     )
   }  
@@ -34,6 +36,7 @@ const AuthComponent =() => {
     <Routes>
       <Route path="/" element={<Login />} />
       <Route path="/signup" element={<SignUp />} />
+      {/* <Route path="*" element={<PageNotFound />} /> */}
     </Routes>
   )
 }

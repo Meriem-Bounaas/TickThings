@@ -1,6 +1,6 @@
 import Navbar from './components/navbar';
 import './style/index.css';
-import { Outlet } from "react-router-dom";
+import {  Outlet } from "react-router-dom";
 import src from './media/todo.png';
 import { useTranslation } from "react-i18next";
 import Translate from './components/translate';
@@ -13,6 +13,7 @@ import { db } from './firebase-config';
 import { collection, getDocs, query, where } from 'firebase/firestore';
 import { setIsLoading } from './redux/loading-slice';
 import NotificationSystem from './components/notification-system';
+import  { isNotify } from './redux/notify-slice';
 
 
 function App() {
@@ -63,8 +64,7 @@ function App() {
         });
       }
     } catch (e) {
-      console.log(e.message)
-      //notification
+      dispatch(isNotify('error in server'));
     }
   }
 
@@ -73,7 +73,6 @@ function App() {
     // loadTasks();
     loadTasksByUser();
   }, [])
-
 
   return (
     <div className="flex flex-col h-screen font-font p-2 lg:p-0">
@@ -90,7 +89,7 @@ function App() {
 
       <div className='flex flex-col lg:flex-row h-full'>
         <div className='flex flex-col lg:border-r-2 lg:border-third-color lg:h-full lg:w-1/5 gap-5 items-center mt-4 lg:mt-0'>
-          <span className='hidden lg:block text-xl text-forth-color capitalize pt-4 font-title'>{t('task management')}</span>
+          <span className='hidden lg:block text-xl text-forth-color capitalize pt-4 font-title mb-8'>{t('task management')}</span>
           <Navbar />
         </div>
         <Outlet />

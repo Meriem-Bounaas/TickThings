@@ -1,12 +1,9 @@
-import { createUserWithEmailAndPassword, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
+import { createUserWithEmailAndPassword } from "firebase/auth";
 import { useForm } from "react-hook-form";
 import { auth } from "../../firebase-config";
 import src from '../../media/todo-background.jpg';
-import google from '../../media/google.png'
-import { useContext } from "react";
 import { UilArrowCircleLeft } from '@iconscout/react-unicons'
 import { useNavigate } from "react-router-dom";
-import AuthContext from "../../auth-context";
 import { useTranslation } from "react-i18next";
 import 'react-toastify/dist/ReactToastify.css';
 import { isMessage, isNotify } from "../../redux/notify-slice/index.js"
@@ -17,7 +14,6 @@ import NotificationSystem from "../../components/notification-system";
 const SignUp = () => {
     const { register, getValues, formState: { errors }, handleSubmit } = useForm();
     const navigate = useNavigate();
-    const { user } = useContext(AuthContext);
     const { t } = useTranslation();
     const dispatch = useDispatch();
 
@@ -81,7 +77,7 @@ const SignUp = () => {
                         className=" text-lg  px-2 border-b-2 border-solid mb-4 h-12 w-full"
                     />
                     {errors.password1 &&
-                        <p className="bg-white text-red mb-5">
+                        <p className="bg-white text-red mb-5 text-center">
                             {t("* Your password must be at least 8 characters")}
                         </p>}
 

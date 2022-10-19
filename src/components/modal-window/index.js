@@ -79,7 +79,7 @@ const ModalWindow = () => {
     // }    
 
     return (
-        <div className="z-10 lg:z-10 absolute top-0 left-0 bg-primary-color w-screen h-screen flex align-middle modal">
+        <div className="z-10 lg:z-10 lg:absolute top-0 left-0 bg-primary-color w-screen h-screen flex align-middle modal fixed">
             <div className="w-full h-full lg:w-1/3 lg:h-fit bg-white rounded-sm flex flex-col m-auto lg:justify-between p-4">
                 <form onSubmit={handleSubmit(onSubmit)}>
                     <input

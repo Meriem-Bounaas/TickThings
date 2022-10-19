@@ -5,7 +5,7 @@ const StatusBar = () => {
     const { t } = useTranslation();
 
     const allTask = useSelector(state => state.task.taskList);
-    const completedTaskLength = allTask.filter(task => !task.completed).length
+    const completedTaskLength = allTask.filter(task => task.completed===true).length
     const inProgressTaskLength = allTask.length - completedTaskLength
 
     return (

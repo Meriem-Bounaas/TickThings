@@ -9,7 +9,7 @@ import { useTranslation } from "react-i18next";
 import GridListView from "../../components/grid-list-view";
 import { useNavigate } from "react-router-dom";
 import AuthContext from "../../auth-context";
-import { useContext } from "react";
+import { useContext, useLayoutEffect, useRef, useState } from "react";
 import ReactLoading from 'react-loading';
 
 
@@ -18,6 +18,10 @@ const InProgressPage = () => {
     const { user } = useContext(AuthContext);
     const isLoading = useSelector(state => state.loading.isLoading)
     const navigate = useNavigate();
+    const [heightPage, setHeightPage] = useState()
+    const refPage = useRef()
+    const [heightDives, setHeightDives] = useState()
+    const [nombreDives, setNombreDives] = useState()
 
 
     const openModal = useSelector(state => state.modal.openModal)
@@ -25,7 +29,13 @@ const InProgressPage = () => {
     const format = useSelector(state => state.format.format)
     const dispatch = useDispatch()
 
-    const inProgressTasks = taskInProgress.filter(task => !task.completed).map(task => <TaskCard task={task} />)
+    const inProgressTasks = taskInProgress.filter(task => task.completed!==true).map(task => <TaskCard task={task} />)
+console.log(inProgressTasks);
+    useLayoutEffect(() => {
+        setHeightPage(refPage.current.offsetHeight);
+        setHeightDives(130 * inProgressTasks.length)
+        setNombreDives(inProgressTasks.length)
+    }, [inProgressTasks.length])
 
     if (!user) {
         navigate("/")
@@ -49,7 +59,8 @@ const InProgressPage = () => {
 
             {openModal && <ModalWindow setOpenModal={setOpenModal} />}
 
-            <div className={`lg:mx-auto ${(format === 'grid') ? 'grid grid-cols-2 lg:grid-cols-3 lg:ml-24 lg:mr-24' : 'flex flex-col lg:w-2/3'} `}>                {isLoading && <ReactLoading type={'spin'} color={'#385a64'} height={300} width={100} className="ml-96 mt-28" />}
+            <div ref={refPage} className={`lg:mx-auto lg:h-[65vh] ${heightDives > heightPage && (format === 'list') ? 'overflow-y-scroll' : ''}  ${nombreDives > 6 && (format === 'grid') ? 'overflow-y-scroll' : ''} ${(format === 'grid') ? 'grid grid-cols-2 lg:grid-cols-3 lg:ml-24 lg:mr-24' : 'flex flex-col lg:w-2/3'} `}>
+                {isLoading && <ReactLoading type={'spin'} color={'#385a64'} height={300} width={100} className="lg:ml-72 lg:mt-28 ml-28 mt-10" />}
                 {inProgressTasks}
             </div>
 

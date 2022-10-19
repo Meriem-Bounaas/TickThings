@@ -24,6 +24,9 @@ module.exports = {
         "fivth-color": 'var(--fivth-color)',
         "sixth-color": 'var(--sixth-color)'
       },
+      boxShadow: {
+        '3xl': 'rgba(45, 35, 66, 0.4) 0 2px 4px,rgba(45, 35, 66, 0.3) 0 7px 13px -3px,#D6D6E7 0 -3px 0 inset',
+      }
     },
   },
   plugins: [],

@@ -10,7 +10,7 @@ export const TaskSlice = createSlice({
   },
   reducers: {
     addTask: (state, action) => {
-      state.taskList.push({ ...action.payload,  })
+      state.taskList.push({ ...action.payload,completed: JSON.parse(action.payload.completed.toLowerCase())})
     },
     deletTask: (state, action) => {
       state.taskList = state.taskList.filter(task => task.key !== action.payload)

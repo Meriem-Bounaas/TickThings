@@ -54,7 +54,7 @@ const Login = () => {
             <div className="h-full w-full md:w-1/2 flex flex-col md:justify-center md:mt-0 mt-20 ">
                 <div className="flex flex-row items-baseline gap-2   justify-center">
                     <img src={logo} alt="img" className='w-8 h-8 visible md:invisible' />
-                    <span className="font-logo text-4xl capitalize text-center text-primary-color mb-10 md:mb-14 md:mr-10 md:text-3xl lg:text-5xl">todo list </span>
+                    <span className="font-logo text-4xl capitalize text-center text-primary-color mb-10 md:mb-14 md:mr-10 md:text-3xl lg:text-5xl">TickThings</span>
                 </div>
                 <form onSubmit={handleSubmit(login)} className="flex flex-col items-start my-0 lg:mx-24 mx-6 md:mx-10">
                     <span className="font-font text-lg capitalize  text-sixth-color mt-3">email </span>

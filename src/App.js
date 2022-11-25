@@ -64,7 +64,7 @@ function App() {
         });
       }
     } catch (e) {
-      dispatch(isNotify('error in server'));
+      // dispatch(isNotify('error in server'));
     }
   }
 
@@ -79,7 +79,7 @@ function App() {
       <div className='flex flex-row border-b-2 border-third-color'>
         <div className=" w-screen items-end flex flex-row p-4 ">
           <img src={src} alt="img" className='w-8 h-auto' />
-          <span className='capitalize text-2xl text-second-color text-end font-logo'>todo List</span>
+          <span className='capitalize text-2xl text-second-color text-end font-logo'>TickThings</span>
         </div>
         <div className='flex flex-row items-baseline gap-2'>
           <Translate />

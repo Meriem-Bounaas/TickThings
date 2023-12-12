@@ -1,6 +1,10 @@
 # About the Project:
 TickThings application: it helps you to manage your personal and professional productivity tasks.
 
+## For test:
+ email: admin@admin.com
+ psw: 123456789
+
  [Live Demo](https://todo-list-psi-ten.vercel.app/)
  <img src="./src/media/app.png">
 

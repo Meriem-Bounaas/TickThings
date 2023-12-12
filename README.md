@@ -3,6 +3,7 @@ TickThings application: it helps you to manage your personal and professional pr
 
 ## For test:
  email: admin@admin.com
+
  psw: 123456789
 
  [Live Demo](https://todo-list-psi-ten.vercel.app/)
